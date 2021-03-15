@@ -1,0 +1,6 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+thietbidienavhh.com	TRUE	/thietbidienavhh_com	FALSE	1999999999	JSESSIONID	07FF7E261CB597DAF94D80E7A3F4E4AC
+.fontawesome.com	TRUE	/	FALSE	1999999999	__cfduid	ddda4b83cca2f58c054f205c12253a4a21608192301
+kit.fontawesome.com	TRUE	/	FALSE	1999999999	SameSite	Lax
+

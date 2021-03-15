@@ -1,0 +1,115 @@
+table  thead tr th{
+    color:var(--text-black-2);
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+.table tr{
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table td, .table th {
+    padding: 3px;
+    vertical-align: middle !important;
+    border: none;
+}
+.table thead th {
+    border-bottom: 0;
+}
+.cart-premove {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 23px 0 23px 3px !important;
+}
+.cart-premove .remove{
+    min-width: 20px;
+    height: 20px;
+    display:block;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    color: #ccc;
+    cursor: pointer;
+    font-weight: 600;
+}
+.cart-img{
+    vertical-align: middle !important;
+}
+.cart-img img{
+    width: 66px !important;
+    height: 66px;
+}
+.cart-subtotal, .cart-price{
+    text-align: right;
+}
+.cart-name  a,.cart-price span,.cart-subtotal span{
+    color: var(--main-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.cart-quantity .input-group{
+    width: 80px;
+}
+.cart-quantity .input-group input{
+    padding: 5px 2px;
+}
+.cart__control {
+    padding-top: 20px;
+}
+.cart-psubtotal th, .order-total th{
+    font-size: 1.5rem;
+    color:var(--text-black-2);
+}
+.cart-psubtotal td , .order-total td{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+.cart-psubtotal td {
+    color: var(--main-color);
+    text-align: right;
+}
+.order-total td {
+    color: var(--red-color);
+    text-align: right;
+}
+.pay-page{
+    padding: 10px 0;
+}
+.pay-page button{
+    width: 100%;
+    display: block;
+    text-transform: uppercase;
+}
+/* .checkout_coupon{
+    padding-top: 5px;
+}
+.checkout_coupon .coupon h3{
+    color:var(--text-black-2);
+    font-size: 1.5rem;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+.checkout_coupon .coupon input{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+.checkout_coupon .coupon button{
+    width: 100%;
+    text-transform: uppercase;
+} */
+
+#nav_danh_muc{
+    width: 258px;
+    font-size: 15px;
+    color: #0e4a9a;
+  }
+  
+  #nav_danh_muc li{
+    padding: 10px 0px;
+    border-bottom: 1px solid #ddd;
+    padding-left: 5px;
+  }

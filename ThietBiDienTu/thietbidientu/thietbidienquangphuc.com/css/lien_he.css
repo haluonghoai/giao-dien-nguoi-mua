@@ -1,0 +1,174 @@
+/* ==============lien he========== */
+.sectionLienHe .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.lienHe {
+  padding-top: 0;
+}
+.lienHe__contact--title,
+.lienHe__userInfo--title {
+  font-size: var(--font-h3-size-mobile);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.lienHe__contact--listDetails {
+  padding-left: 0;
+}
+.lienHe__contact--listDetails li {
+  font-size: var(--font-h4-size-mobile);
+  margin-bottom: 15px;
+  padding-right: 5px;
+}
+
+.lienHe__userInfo--sentBtn button {
+  font-size: 14px;
+}
+
+/* Danh sach zalo */
+.wrap-hr{
+  margin-top: 30px;
+
+}
+.lienHe__contact hr{
+  width: 40%;
+  align-self: center;
+  margin: auto;
+  border-top: 1px dashed var(--text-gray1);
+  background-color: transparent
+}
+
+
+.lienHe__contact--listZalo{
+  margin-top: 20px;
+}
+.lienHe__contact--listZalo ul{
+  /*   border-top: 1px dashed var(--text-gray1);
+   */
+  /* padding-top: 10px */
+}
+.lienHe__contact--listZalo ul li:not(:first-child){
+  margin-top: 10px;
+
+}
+.lienHe__contact--listZalo ul li span:first-child{
+  margin-right: 10px;
+}
+.lienHe__contact--listZalo ul li span:first-child img{
+  width: 60px;
+
+}
+.lienHe__contact--listZalo ul li span:last-child{
+  align-self: center;
+
+}
+.lienHe__contact--listZalo ul li span:last-child h4{
+
+}
+.lienHe__contact--listZalo ul li span:last-child p{
+
+}
+/* end danh sach zalo */
+
+
+
+
+
+
+/* ==============end lien he========== */
+/* ===========more-info========== */
+.moreInfo {
+  background-color: var(--bg-gray2);
+  border-top: 1px solid #e6e4e4;
+}
+.moreInfo ul {
+  padding-left: 0;
+  /* margin-left: 20px; */
+}
+.moreInfo ul li {
+  border-bottom: 1px solid #c9c9c9;
+  padding-bottom: 3px;
+  margin-top: 5px;
+}
+.moreInfo ul li a {
+  color: black;
+  font-size: 14px;
+}
+.moreInfo ul li:hover a {
+  color: var(--text-blue2);
+}
+.moreInfo ul li span:last-child {
+  transition: all 0.2s;
+}
+.moreInfo ul li:hover span:last-child {
+  padding-left: 2px;
+  transition: all 0.2s;
+}
+.moreInfo ul li span:nth-child(2) {
+}
+.moreInfo hr {
+  width: 100px;
+  height: 3px;
+  background-color: #e6e4e4;
+}
+.moreInfo__tvkt--title,
+.moreInfo__tt--title,
+.moreInfo__tlbg--title {
+  font-size: var(--font-h3-size-mobile);
+  font-weight: bold;
+  color: var(--text-blue);
+}
+
+.lienHe input[type='text'] {
+  font-size: 1.4rem !important;
+  height: 30px !important;
+}
+
+.lienHe__userInfo input, .lienHe__userInfo textarea{
+  padding: 5px !important;
+}
+
+.lienHe__userInfo--file{
+  font-size: 1.4rem;
+}
+.lienHe textarea{
+  font-size: 1.4rem !important;
+}
+
+.lienHe__userInfo--sentBtn button{
+  padding-right: 15px;
+  padding-left: 15px;
+  font-size: 1.6rem;
+}
+.lienHe__userInfo--downloadFile{
+    font-size: 1.4rem;
+   padding-right: 10px;
+  padding-left: 10px;
+}
+
+@media screen and(min-width: 768px) {
+  .lienHe__userInfo--sentBtn button {
+    font-size: 1.6rem;
+  }
+  .lienHe input[type='text']{
+    font-size: 1.6rem !important;
+
+  }
+  .lienHe textarea{
+    font-size: 1.6rem !important;
+  }
+}
+
+#nav_danh_muc{
+  width: 258px;
+  font-size: 15px;
+  color: #0e4a9a;
+}
+
+#nav_danh_muc li{
+  padding: 10px 0px;
+  border-bottom: 1px solid #ddd;
+  padding-left: 5px;
+}
+/* ===========end more-info========== */
