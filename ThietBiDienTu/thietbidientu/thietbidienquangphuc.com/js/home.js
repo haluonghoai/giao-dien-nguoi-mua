@@ -218,14 +218,3 @@ function runPartnerCarousel() {
     ]
   });
 }
-
-// neu la id thi them # dang truoc con . voi class
-$(document).on('click','.chuyen cai class danh muc ma cau se de bat su kien vao cho nay ',function(){
- var list_product = $('#list-product').val();
- list_product.html('');
- var html = 'chuyen  html voi du lieu cau lay duoc tu ben api vao day theo';
- list_product.html(html);
-
- 
-
-})

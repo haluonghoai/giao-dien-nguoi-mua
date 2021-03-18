@@ -26,7 +26,7 @@ $(function () {
     textSearch = $("#text-search");
     navNTemp = liNavTemp.find(".class-n");
 
-    viewSocialCompany();
+    //viewSocialCompany();
     activeMenuMain();
     viewNavAndSelectCategorySearch();
     viewNumberCart();
@@ -111,7 +111,7 @@ async function viewNavAndSelectCategorySearch() {
 
 function viewNav1() {
     $.ajax({
-        url:"http://localhost:8080/Doan_Thietbidien_war/api/v1/category/find-all",
+        url:"http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/category/find-all",
         method:"GET",
         success:function(rs){
             var dataArray = rs.data;
@@ -128,7 +128,7 @@ function viewNav1() {
     
     function showAllProduct(){
         $.ajax({
-            url:"http://localhost:8080/Doan_Thietbidien_war/api/v1/product/find-all",
+            url:"http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/product/find-all",
             method:"GET",
             success:function(rs){
             var dataArray = rs.data;
