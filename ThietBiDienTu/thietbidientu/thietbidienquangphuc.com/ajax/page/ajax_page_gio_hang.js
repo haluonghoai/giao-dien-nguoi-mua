@@ -1,8 +1,8 @@
-let listProductCart, cartProductTemp, tempSumTotal, sumTotal;
+let cartProductTemp, tempSumTotal, sumTotal;
 var arrCart = [];
 var cart = [];
 $(function (){
-    listProductCart = $("#list-product-cart");
+    // listProductCart = $("#list-product-cart");
     cartProductTemp = $("#cart-product-temp");
     tempSumTotal = $("#temp-sum-total");
     sumTotal = $("#sum-total");
@@ -10,70 +10,59 @@ $(function (){
     viewListProductCart();
 })
 
-async function viewListProductCart() {
-    cart = getCartLocalStorage();
-    if(cart && cart.length > 0) {
-        let listId = cart.map(data => data.id);
-        await productFindByIdsAndProperties(listId).then(rs => {
-            if(rs) {
-                arrCart = rs.map((data, index) => {
-                    for(let j = 0; j < cart.length; j++) {
-                        if(data.id == cart[j].id) {
-                            data.number = cart[j].number;
-                            return data;
-                        }
-                    }
-                })
+
+//cart
+function getCartLocalStorage() {
+    let cart = [];
+    if (localStorage && localStorage.getItem("cart")) {
+        cart = JSON.parse(localStorage.getItem("cart"));
+    }
+    return cart;
+}
+
+
+$(".btn-add-cart").unbind("click").click(function () {
+    console.log('hello')
+    addToCart($(this).attr("data-id"));
+    return false;
+})
+
+
+function addToCart(id, number = 1) {
+    let cart = getCartLocalStorage();
+    let check = true;
+    cart = cart.map(data => {
+        if(data.id == id) {
+            if(data.number == number) {
+                alertInfo(INFO_CART_PRODUCT_EXIT);
+            } else {
+                data.number = number;
+                alertSuccess(SUCCESS_CART_UPDATE_NUMBER_PRODUCT);
             }
-        }).catch(err => {
-            setItemLocalStorage("cart", []);
-            console.log(err);
-            alertDanger(DANGER_LIST_PRODUCT);
-        })
+            check = false;
+        }
+        return data;
+    })
+    if(check) {
+        cart.push({id, number});
+        alertSuccess(SUCCESS_CART_ADD_PRODUCT);
     }
-    renderListProductCart();
-    countCost(arrCart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  //  viewNumberCart();
 }
 
-function renderListProductCart() {
-    let viewListProduct = "";
-    if(arrCart && arrCart.length > 0) {
-        viewListProduct = arrCart.map(data => {
-            let {alias, id, name, promotions, cost, number, quantity, image} = data;
-            let cartProductClone = cartProductTemp.clone();
-            cartProductClone.removeClass("d-none");
-            cartProductClone.find(".remove").attr("onclick", `removeProductCart(${id})`);
-            cartProductClone.attr("id", `product-cart-${id}`);
-            cartProductClone.find(".href-product-cart").attr("href", viewAliasProduct(alias, id));
-            let imgProductClone = cartProductClone.find(".img-product-cart");
-            imgProductClone.attr("src", viewSrcFile(image));
-            imgProductClone.attr("alt", viewField(name));
-            cartProductClone.find(".name-product-cart").html(viewField(name));
-            let {minusPrice} = viewPromotionCostProduct(promotions, cost);
-            cost = cost - minusPrice;
-            cartProductClone.find(".cost-product-cart").html(viewPriceVND(cost));
-            cartProductClone.find(".total-product-cart").html(viewPriceVND(cost * number));
-            let inputProductClone = cartProductClone.find(".input-product-cart");
-            inputProductClone.attr("max", quantity);
-            inputProductClone.val(number);
-            inputProductClone.attr("onchange", `inputChangeProductCart(${id}, ${quantity})`);
-            return cartProductClone;
-        })
-    }
-    listProductCart.html(viewListProduct);
-    runInputSpinner();
-}
 
-function inputChangeProductCart(id, quantity) {
-    let inputQuantity = $(`#product-cart-${id} input[type='text']`);
-    let val = inputQuantity.val();
-    if(val > 0 && val <= quantity) {
-        changeNumberProductCart(id, val);
-    }else if(val == 0) {
-        removeProductCart(id);
-    }
-    viewNumberCart();
+
+function handleAnimationCart() {
+    $(".gioHang .animate__animated").addClass("animate__wobble");
+    setTimeout(function () {
+        $(".gioHang .animate__animated").removeClass("animate__wobble");
+    },1000);
 }
+//end_cart
+
+
+
 
 function changeNumberProductCart(id, number) {
     arrCart = arrCart.map(data => {

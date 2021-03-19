@@ -256,15 +256,7 @@ function setItemLocalStorage(key, val) {
     localStorage.setItem(key, JSON.stringify(val));
 }
 
-function getItemSessionStorage(key) {
-    let rs = sessionStorage.getItem(key);
-    rs = rs ? JSON.parse(rs) : null;
-    return rs;
-}
 
-function setItemSessionStorage(key, val) {
-    sessionStorage.setItem(key, JSON.stringify(val));
-}
 
 function removeItemLocalStorage(key) {
     localStorage.removeItem(key);
@@ -398,65 +390,6 @@ function hiddenLoadingBtn() {
     $(".btn-loading img").addClass("d-none");
     $(".btn-loading").prop("disabled", false);
 }
-
-//cart
-function getCartLocalStorage() {
-    let cart = [];
-    if (localStorage && localStorage.getItem("cart")) {
-        cart = JSON.parse(localStorage.getItem("cart"));
-    }
-    return cart;
-}
-
-function clickBtnAddCart() {
-    $(".btn-add-cart").unbind("click").click(function () {
-        addToCart($(this).attr("data-id"));
-        return false;
-    })
-}
-
-function addToCart(id, number = 1) {
-    let cart = getCartLocalStorage();
-    let check = true;
-    cart = cart.map(data => {
-        if(data.id == id) {
-            if(data.number == number) {
-                alertInfo(INFO_CART_PRODUCT_EXIT);
-            } else {
-                data.number = number;
-                alertSuccess(SUCCESS_CART_UPDATE_NUMBER_PRODUCT);
-            }
-            check = false;
-        }
-        return data;
-    })
-    if(check) {
-        cart.push({id, number});
-        alertSuccess(SUCCESS_CART_ADD_PRODUCT);
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    viewNumberCart();
-}
-
-function viewNumberCart() {
-    let arrProduct = getItemLocalStorage("cart");
-    let count = 0;
-    if(arrProduct && arrProduct.length > 0) {
-        arrProduct.map(data => {
-            count += parseInt(data.number);
-        })
-    }
-    $("#slsp-s").html(count);
-    handleAnimationCart();
-}
-
-function handleAnimationCart() {
-    $(".gioHang .animate__animated").addClass("animate__wobble");
-    setTimeout(function () {
-        $(".gioHang .animate__animated").removeClass("animate__wobble");
-    },1000);
-}
-//end_cart
 
 function runInputSpinner() {
     $("input[type='number']").inputSpinner();

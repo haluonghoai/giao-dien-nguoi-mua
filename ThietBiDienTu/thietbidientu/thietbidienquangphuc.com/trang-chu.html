@@ -52,14 +52,11 @@
         <script src="plugins/pagination/pagination.js"></script>
         <link rel="stylesheet" href="plugins/animate/animate.min.css" type="text/css"/>
         <!-- ============= Global Js ============= -->
-        <script src="js/app_const.js"></script>
-        <script src="js/global.js"></script>
-        <script src="ajax/ajax_main.js"></script>
+       
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_global.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_infor_system_service.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_product_service.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_news_service.js"></script>
-        <script src="ajax/page/ajax_page_base.js"></script>
         <!-- ============= Import Custom Sale Head ============= -->
         <meta property="fb:app_id" content="1239278239786334"/>
         <meta property="fb:admins" content="100013406503167"/>
@@ -102,6 +99,8 @@
                 <div class="nav-category">
                     <i class="fas fa-bars"></i>
                     <!-- <span>Danh mục sản phẩm</span> --> 
+
+
                     <span class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Danh mục sản phẩm
@@ -197,7 +196,29 @@
         </div>
     </div>
 </section>
+<section class="h-product search-product">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pb-5">
+                <h2 class="text-center section-title">Sản phẩm vừa tìm kiếm</h2>
+            </div>
+        </div>
+        <div class="row" id="list-product-temp-home">
+             
+        </div>
+    </div>
+    <div class="container product-wrapper" id="list-product-temp" data-product-type="">
+        <div class="row">
+            <div id="list-product-search">
+                
+            </div>
+        </div>
+    </div>   
+</section>
 <section class="h-product">
+  
+
     <div class="container">
         <div class="row">
             <div class="col-12 pb-5">
@@ -605,7 +626,7 @@
 <div class="gioHang">
     <a href="gio-hang.html" class="cart-icon animate__animated" title="Giỏ hàng của bạn">
         <i class="fas fa-shopping-basket"></i>
-        <span id="slsp-s"></span>
+        <span id="slsp-s">3</span>
     </a>
     <div class="circle" style="animation-delay: 0s"></div>
     <div class="circle" style="animation-delay: 1s"></div>
@@ -639,6 +660,13 @@
         attribution="setup_tool"
         page_id="106386468194951">
       </div>
+
+
+      <script src="js/app_const.js"></script>
+      <script src="js/global.js"></script>
+      <script src="ajax/ajax_main.js"></script>
+      <script src="ajax/page/ajax_page_base.js"></script>
+      <script src="ajax/page/ajax_page_gio_hang.js"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script>
