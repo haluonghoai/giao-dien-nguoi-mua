@@ -3,7 +3,10 @@ let textNameCompany, textSlogan, linkEmailCompany, textEmailCompany, linkFaceboo
 
 //Array Product cart
  const products = getItemSessionStorage("productsItem") || [];
- let listProductCart;
+ let productQuantity = 0;
+ let listProductCart, listCalTotal;
+
+ let checkItemInCart = false;
 
 $(function () {
     //textNameCompany = $(".text-name-company");
@@ -29,6 +32,7 @@ $(function () {
     selectCategorySearch = $("#cars");
     textSearch = $("#text-search");
     navNTemp = liNavTemp.find(".class-n");
+    listCalTotal = $('#cal-total-sum');
 
     //viewSocialCompany();
 
@@ -44,15 +48,16 @@ $(function () {
     activeMenuMain();
     viewNavAndSelectCategorySearch();
     viewNumberCart();
+    renderListProductCart();
     keypressEnterInputSearchProduct();
     showAllProduct();
     viewNav1();
-
+    
+    // bao vut vao day thay
    // addProductToCart();
     //cartNumberCount.html(products.length);
 
 })
-
 //HEADER
 function viewSocialCompany() {
     companyFindById(COMPANY_ID).then(rs => {
@@ -158,7 +163,7 @@ function viewNav1() {
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 console.log(dataArray);
-                $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].id+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].id+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
             };      
             }
             })
@@ -174,7 +179,6 @@ function viewNav1() {
                 console.log(dataArray.length);
                 for (var i = 0; i < dataArray.length; i++){
                     // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
-                    
                     $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].id+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
                 };      
                 }
@@ -227,23 +231,60 @@ function addProductToCart(e) {
     let productName = e.target.dataset.name;
     let productPrice = e.target.dataset.price;
     let productImage = e.target.dataset.image;
+
     
+    //check quantity
+    checkItemInCart = products.filter(data => {
+        
+        return data.productID === productID ;
+    })
 
     const product = {
-        productID,
-        productName,
-        productPrice,
-        productImage,
+                productID,
+                productName,
+                productPrice,
+                productImage,
+                productQuantity: 1
+    };
+    // check item co roi thi quantity += 1
+    //ham onload dau ? viet di xong t onload
+    //the m viet sang 1 file khac roi nhung no vao n
+    // tu tu dat ho cai de bug
+    // moi lan xoa session reffresh lai trang di dang bi code thg kia de len
+    //ok ?, ke dau buoi, do m chay dc day
+    // ao vlon :)). chan ban lam master javascriup the nay thi ong :v 
+    if(checkItemInCart.length > 0){
+        
+        products.forEach(p => {
+            if(p.productID === productID) {
+                p.productQuantity += 1;
+            }
+        })
     }
+    else
+        products.push(product);
 
-    products.push(product)
-    
+  
     setItemSessionStorage("productsItem", products);
+    
     viewNumberCart();
-   
-    alert('Đã thêm ' + productName + ' vào giỏ hàng');
-    //onclick="addProductToCart(event)" add to (btn-add-cart) button
+
+    //the m push len di roi di ngu cho do met
 }
+
+function cal(products){
+    var calculation = {
+        amount : 0,
+        amountTemp : 0
+    }
+    products.forEach(p =>{
+        amountTemp += p.productPrice * p.productQuantity;
+    })
+    amount += amountTemp + amountTemp * 0,1;
+    return calculation;
+}
+
+// lam not di dm // past cai ham vao day, cai ham calc vua tinh ys
 
 function viewNumberCart() {
     let arrProduct = getItemSessionStorage("productsItem");
@@ -258,9 +299,65 @@ function viewNumberCart() {
     
     handleAnimationCart();
 }
+//t muon vut vao 1 cai no cung chuc nang. kieu nhu render list product thi render luon cai tong
+function renderListProductCart() {
+    let newCart = getItemSessionStorage("productsItem");
+    let viewListProductCart, viewListCalTotal = '';
+    if(newCart && newCart.length > 0) {
+        console.log(newCart);
+
+        //render list
+        viewListProductCart = newCart.map(item => {
+            return ` <tr class="cart_item" id="cart-product-new">
+                                <td class="cart-premove">
+                                    <span class="remove" title="Xóa sản phẩm này" onclick="removeProductCart()">×</span>
+                                </td>
+                                <td class="cart-img">
+                                    <a href="#" class="href-product-cart">
+                                        <img src="${item.productImage}" alt="" class="img-product-cart">
+                                    </a>
+                                </td>
+                                <td class="cart-name">
+                                    <a href="#" class="href-product-cart name-product-cart">${item.productName}</a>
+                                </td>
+                                <td class="cart-price  d-none d-md-block" data-title="Giá">
+                                    <span class="cost-product-cart">${item.productPrice}</span>
+                                </td>
+                                <td class="cart-quantity" data-title="Số lượng">
+                                    <span class="cost-product-cart">${item.productQuantity}</span>
+                                </td>
+                                <td class="cart-subtotal" data-title="Tổng">
+                                    <span class="total-product-cart">${item.productPrice * item.productQuantity}</span>
+                                </td>
+                     </tr>
+            `;
+        });
+
+        //render tong
+
+        viewListCalTotal =  `
+            <tr class="cart-psubtotal">
+                <th>Tạm tính</th>
+                <td data-title="Tạm tính" id="tam-tinh">
+                    <span id="temp-sum-total">${cal(newCart)}</span>
+                </td>
+            </tr>
+            <tr class="order-total">
+                <th>Tổng</th>
+                <td data-title="Tổng" id="tong-tien">
+                    <span id="sum-total">${cal(newCart)}</span>
+                </td>
+            </tr>
+        `;
+    }
 
 
-async function viewListProductCart() {
+
+    listProductCart.html(viewListProductCart);
+    listCalTotal.html(viewListCalTotal)
+}
+
+/* async function viewListProductCart() {
     let newCart = getItemSessionStorage("productsItem");
     if(newCart && newCart.length > 0) {
         let listId = newCart.map(data => data.id);
@@ -283,9 +380,9 @@ async function viewListProductCart() {
     }
     renderListProductCart();
     countCost(arrCart);
-}
+} */
 
-function renderListProductCart() {
+/* function renderListProductCart() {
     let viewListProduct = "";
     if(arrCart && arrCart.length > 0) {
         viewListProduct = arrCart.map(data => {
@@ -313,6 +410,7 @@ function renderListProductCart() {
     listProductCart.html(viewListProduct);
     runInputSpinner();
 }
+*/
 
 function inputChangeProductCart(id, quantity) {
     let inputQuantity = $(`#product-cart-${id} input[type='text']`);
