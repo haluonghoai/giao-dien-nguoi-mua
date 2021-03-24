@@ -23,7 +23,7 @@ function categoryProductFindByParent(id) {
 //     return ajaxGet(`${URL_API_PRODUCT_SERIVCE}v1/public/categorys/product-type/${id}`);
 // }
 function categoryProductFindByProductType(id) {
-    return ajaxGet(`http://localhost:8080/Doan_Thietbidien_war/api/v1/category/find-all`);
+    return ajaxGet(`http://localhost:8080/api/v1/category/find-all`);
 }
 //END_CATEGORY_API
 

@@ -142,10 +142,11 @@ async function viewNavAndSelectCategorySearch() {
 
 function viewNav1() {
     $.ajax({
-        url:"http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/category/find-all",
+        url:"http://localhost:8080/api/v1/category/find-all",
         method:"GET",
+        dataType: "json",
         success:function(rs){
-            var dataArray = rs.data;
+            var dataArray = rs["data"];
             for (var i = 0; i < dataArray.length; i++){
                 
                var name = dataArray[i].name;
@@ -162,10 +163,11 @@ function viewNav1() {
         
        
         $.ajax({
-            url:"http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/product/find-all",
+            url:"http://localhost:8080/api/v1/product/find-all",
             method:"GET",
+        dataType: "json",
             success:function(rs){
-            var dataArray = rs.data;
+            var dataArray = rs["data"];
         
             console.log(dataArray.length);
             for (var i = 0; i < dataArray.length; i++){
@@ -180,10 +182,11 @@ function viewNav1() {
 
     function loadProductByCategory() {
         $.ajax({
-            url: "http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/category/find-all",
-            method: "GET",
+            url: "http://localhost:8080/api/v1/category/find-all",
+        dataType: "json",
+        method: "GET",
             success:function(rs){
-                var dataArray = rs.data;
+            var dataArray = rs["data"];
                 console.log(dataArray.length);
                 for (var i = 0; i < dataArray.length; i++){
                     // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
@@ -198,11 +201,13 @@ function searchProduct() {
     let linkProductType = selectCategorySearch.val();
     let search = textSearch.val();
     $.ajax({
-        url: `http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/product/search-by-name?name=${search}`,
+        url: `http://localhost:8080/api/v1/product/search-by-name?name=${search}`,
+        dataType: "json",
         method: "GET",
         success:function(rs){
-            var dataArray = rs.data;
+            var dataArray = rs["data"];
             console.log(dataArray.length);
+            $('#list-product-search').empty();
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 $('.search-product').css('display', 'block');
@@ -286,9 +291,9 @@ function cal(products){
         amountTemp : 0
     }
     products.forEach(p =>{
-        amountTemp += p.productPrice * p.productQuantity;
+        calculation.amountTemp += p.productPrice * p.productQuantity;
     })
-    amount += amountTemp + amountTemp * 0,1;
+    calculation.amount += calculation.amountTemp + calculation.amountTemp * 0,1;
     return calculation;
 }
 
@@ -348,13 +353,13 @@ function renderListProductCart() {
             <tr class="cart-psubtotal">
                 <th>Tạm tính</th>
                 <td data-title="Tạm tính" id="tam-tinh">
-                    <span id="temp-sum-total">${cal(newCart)}</span>
+                    <span id="temp-sum-total">${cal(newCart).amountTemp}</span>
                 </td>
             </tr>
             <tr class="order-total">
                 <th>Tổng</th>
                 <td data-title="Tổng" id="tong-tien">
-                    <span id="sum-total">${cal(newCart)}</span>
+                    <span id="sum-total">${cal(newCart).amount}</span>
                 </td>
             </tr>
         `;
@@ -466,7 +471,7 @@ function loginUser() {
        // var form = $(this);
       //  var url = form.attr('action'); //get submit url [replace url here if desired]
         $.ajax({
-            url: `http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/customer/search-customer-name?username=${username}`,
+            url: `http://localhost:8080/api/v1/customer/search-customer-name?username=${username}`,
             method: "GET",
             success:function(rs){
                 let userPassword;

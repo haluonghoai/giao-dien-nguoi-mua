@@ -7,7 +7,7 @@ $(function (){
     tempSumTotal = $("#temp-sum-total");
     sumTotal = $("#sum-total");
     hiddenNavHero();
-    viewListProductCart();
+    // viewListProductCart();
 })
 
 
