@@ -29,15 +29,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					
 					<div class="header-left-bottom agileinfo">
 						
-					 <form action="trang-chu.html" method="post">
-						<input type="text"  value="User name" name="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
-					<input type="password"  value="Password" name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
+					<div id="myForm">
+						<input type="text"  value="Username" name="myName" id="myName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
+						<input type="password"  value="Password" name="myPassword" id="myPassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
 						<div class="clear"> </div>
 					  </div>
 					   <div class="login" style="text-align:center;">
-						<a href="trang-chu.html" style="color:white">Login</a>
+							<a href="#" class="myBtnLogin">Login</a>
+							<!-- <input type="submit" id="login" value="Login" class="myBtnLogin" > -->
 					   </div>
-					</form>	
+					</div>	
+
+							
+					<!-- <form method="POST" id="myForm">
+						<input type="text"  value="Username" name="myName" id="myName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
+						<input type="password"  value="Password" name="myPassword" id="myPassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
+						<div class="clear"> </div>
+					  </div>
+					   <div class="login" style="text-align:center;">
+							<a href="" class="myBtnLogin"></a>
+							<input type="submit" id="login" value="Login" class="myBtnLogin" >
+					   </div>
+					</form>	 -->
 						
 				</div>
 				</div>
@@ -46,6 +59,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 </div>
 <!--header end here-->
+
 <!--footer end here-->
+	<script src="ajax/page/ajax_page_base.js"></script>
 </body>
 </html>

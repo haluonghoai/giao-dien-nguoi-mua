@@ -8,6 +8,9 @@ let textNameCompany, textSlogan, linkEmailCompany, textEmailCompany, linkFaceboo
 
  let checkItemInCart = false;
 
+ // Login - Register (Form)
+ let fieldUsername, fieldPassword, formLogin, btnLogin;
+
 $(function () {
     //textNameCompany = $(".text-name-company");
     textSlogan = $(".text-solgan");
@@ -39,9 +42,14 @@ $(function () {
     cartNumberCount = $('#slsp-s');
     listProductCart = $("#list-product-cart");
 
+    //Login
 
+    fieldUsername = $('#myName');
+    fieldPassword = $('#myPassword');
+    formLogin = $('#myForm');
+    btnLogin = $('.myBtnLogin');
 
-
+    loginUser();
 
 
 
@@ -333,7 +341,8 @@ function renderListProductCart() {
             `;
         });
 
-        //render tong
+        //render tong 
+        // Lam tiep o day
 
         viewListCalTotal =  `
             <tr class="cart-psubtotal">
@@ -443,4 +452,38 @@ function activeMenuMain() {
     if(pathname == "/") pathname = "/trang-chu";
     $("#nav-main li").removeClass("active");
     $(`#nav-main li[data-active='${pathname.slice(1)}']`).addClass("active");
+}
+
+
+function loginUser() {  
+  
+    // jQuery ajax form submit example, runs when form is submitted 
+    btnLogin.on('click', function(e) { 
+        var username = fieldUsername.val();
+        var password = fieldPassword.val();
+        // e.preventDefault(); // prevent actual form submit
+        console.log(username);
+       // var form = $(this);
+      //  var url = form.attr('action'); //get submit url [replace url here if desired]
+        $.ajax({
+            url: `http://localhost:8080/DOAN_Thiet_bi_dien_war/api/v1/customer/search-customer-name?username=${username}`,
+            method: "GET",
+            success:function(rs){
+                let userPassword;
+                
+                userPassword = rs.data[0].password;
+                if(password != userPassword) { // check tạm, check cẩn thận thì phải ===
+                    alert('Username or Password wrong');
+                    return;
+                } else {
+                    alert('Login Success');
+                    window.location = 'trang-chu.html';
+                }
+                
+            },
+            error: function(rs) {
+                alert('Login that bai')
+            }
+        });
+    });
 }

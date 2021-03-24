@@ -803,3 +803,12 @@ span.sin-color {
 }
 }
 /*--meadia quries end here--*/
+
+/*Custom css*/
+.myBtnLogin {
+  padding: 10px 20px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
