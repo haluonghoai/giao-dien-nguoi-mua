@@ -8,6 +8,8 @@ let textNameCompany, textSlogan, linkEmailCompany, textEmailCompany, linkFaceboo
 
  let checkItemInCart = false;
 
+ let myButtonCart, myButtonThanhtoan;
+
  // Login - Register (Form)
  let fieldUsername, fieldPassword, formLogin, btnLogin;
 
@@ -41,6 +43,8 @@ $(function () {
 
     cartNumberCount = $('#slsp-s');
     listProductCart = $("#list-product-cart");
+    myButtonCart = $('#myBtnCart');
+    myButtonThanhtoan = $('#btnThanhtoan');
 
     //Login
 
@@ -49,10 +53,10 @@ $(function () {
     formLogin = $('#myForm');
     btnLogin = $('.myBtnLogin');
 
+    
     loginUser();
 
-
-
+    buttonHandleEvent();
     activeMenuMain();
     viewNavAndSelectCategorySearch();
     viewNumberCart();
@@ -165,15 +169,14 @@ function viewNav1() {
         $.ajax({
             url:"http://localhost:8080/api/v1/product/find-all",
             method:"GET",
-        dataType: "json",
+            dataType: "json",
             success:function(rs){
             var dataArray = rs["data"];
         
-            console.log(dataArray.length);
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 console.log(dataArray);
-                $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].id+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
             };      
             }
             })
@@ -190,7 +193,7 @@ function viewNav1() {
                 console.log(dataArray.length);
                 for (var i = 0; i < dataArray.length; i++){
                     // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
-                    $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].id+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                    $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
                 };      
                 }
         })
@@ -211,7 +214,7 @@ function searchProduct() {
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 $('.search-product').css('display', 'block');
-                $('#list-product-search').append('<div class="product-inner-search my-3"> <div class="product-search__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].id+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                $('#list-product-search').append('<div class="product-inner-search my-3"> <div class="product-search__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
                 
             };      
             }
@@ -224,6 +227,7 @@ function searchProduct() {
 
 // ADD TO CART NEW
 
+
 function getItemSessionStorage(key) {
     let rs = sessionStorage.getItem(key);
     rs = rs ? JSON.parse(rs) : null;
@@ -235,12 +239,13 @@ function setItemSessionStorage(key, val) {
 }
 
 
+
 function addProductToCart(e) {
     e = e || window.event;
 
    
 
-    let productID = e.target.dataset.id;
+    let productID = parseInt(e.target.dataset.id);
     let productName = e.target.dataset.name;
     let productPrice = e.target.dataset.price;
     let productImage = e.target.dataset.image;
@@ -316,9 +321,10 @@ function viewNumberCart() {
 function renderListProductCart() {
     let newCart = getItemSessionStorage("productsItem");
     let viewListProductCart, viewListCalTotal = '';
-    if(newCart && newCart.length > 0) {
-        console.log(newCart);
 
+
+    if(newCart && newCart.length > 0) {
+        console.log('hello render');
         //render list
         viewListProductCart = newCart.map(item => {
             return ` <tr class="cart_item" id="cart-product-new">
@@ -348,7 +354,7 @@ function renderListProductCart() {
 
         //render tong 
         // Lam tiep o day
-
+        
         viewListCalTotal =  `
             <tr class="cart-psubtotal">
                 <th>Tạm tính</th>
@@ -460,6 +466,26 @@ function activeMenuMain() {
 }
 
 
+function isLoggedIn() {
+    const tokenLogin = getItemSessionStorage('tokenLoginSuccess');
+    if(!tokenLogin) {
+        return false;
+    }
+    return true;
+}
+
+function autoRedirect() {
+    let validLogin = isLoggedIn();
+    
+    if(!validLogin && location.pathname !== '/login.html') {
+        window.location = 'login.html';
+    }
+    if(validLogin && location.pathname === '/login.html') {
+        window.location = 'dathang.html';
+    }
+}
+
+
 function loginUser() {  
   
     // jQuery ajax form submit example, runs when form is submitted 
@@ -471,18 +497,21 @@ function loginUser() {
        // var form = $(this);
       //  var url = form.attr('action'); //get submit url [replace url here if desired]
         $.ajax({
-            url: `http://localhost:8080/api/v1/customer/search-customer-name?username=${username}`,
-            method: "GET",
+            url: `http://localhost:8080/api/v1/customer/search-customer-username?username=${username}`,
+            type: 'GET',
+            dataType: 'json',
             success:function(rs){
                 let userPassword;
-                
                 userPassword = rs.data[0].password;
                 if(password != userPassword) { // check tạm, check cẩn thận thì phải ===
                     alert('Username or Password wrong');
                     return;
                 } else {
                     alert('Login Success');
-                    window.location = 'trang-chu.html';
+                    setItemSessionStorage('tokenLoginSuccess', JSON.stringify(rs.data[0]));
+                    // console.log(btnLogin.attr("href"));
+                    window.location = 'dathang.html';
+                   // btnLogin.attr("href","gio-hang.html" ); // chua hoan thien
                 }
                 
             },
@@ -490,5 +519,11 @@ function loginUser() {
                 alert('Login that bai')
             }
         });
+    });
+}
+
+function buttonHandleEvent() {
+    myButtonThanhtoan.on('click', function() {
+        autoRedirect();
     });
 }

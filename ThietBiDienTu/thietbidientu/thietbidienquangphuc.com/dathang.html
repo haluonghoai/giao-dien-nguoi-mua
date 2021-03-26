@@ -54,12 +54,14 @@
         <!-- ============= Global Js ============= -->
         <script src="js/app_const.js"></script>
         <script src="js/global.js"></script>
+        <script src="js/dat_hang.js"></script>
         <script src="ajax/ajax_main.js"></script>
+        <script src="ajax/page/ajax_page_base.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_global.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_infor_system_service.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_product_service.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_news_service.js"></script>
-        <script src="ajax/page/ajax_page_base.js"></script>
+
         <!-- ============= Import Custom Sale Head ============= -->
         <meta property="fb:app_id" content="1239278239786334"/>
         <meta property="fb:admins" content="100013406503167"/>
@@ -200,30 +202,33 @@
                                     <th>Tạm tính</th>
                                 </tr>
                                 </thead>
-                                <tbody id="list-product-total"><tr class="">
+                                <tbody id="list-product-total">
+                                    <tr class="">
                                         <td class="name-number-product">Dây điện Cadivi, dây đơn mềm VCm 1x1.5 x 1</td>
                                         <td class="cart-totalprice">
                                             <span class="product-total-price">395.000 VNĐ</span>
                                         </td>
-                                    </tr><tr class="">
+                                    </tr>
+                                    <tr class="">
                                         <td class="name-number-product">Dây điện Trần Phú, dây đơn mềm VCm 1x6.0 x 1</td>
                                         <td class="cart-totalprice">
                                             <span class="product-total-price">4.000.000 VNĐ</span>
                                         </td>
-                                    </tr></tbody>
-                                <tfoot>
-                                <tr class="order-total">
-                                    <th>Tổng</th>
-                                    <td>
-                                        <span class="sum-cost" id="sum-cost">4.395.000 VNĐ</span>
-                                    </td>
-                                </tr>
-                                </tfoot>
+                                    </tr>
+
+                                    <tr class="order-total">
+                                        <th>Tổng</th>
+                                        <td>
+                                            <span class="sum-cost" id="sum-cost">4.395.000 VNĐ</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                               
                             </table>
                             <div class="checkout-payment">
                                 <ul class="payment_methods ">
                                     <li class="">
-                                        <input type="radio" id="payment_method_bacs" value="3" name="payment_method" checked="checked">
+                                        <input type="radio" id="payment_method_bacs" value="0" name="payment_method" checked="checked">
                                         <label for="payment_method_bacs">Chuyển khoản qua ngân hàng</label>
                                         <div class="payment_box payment_method_bacs">
                                             <p>Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi.
@@ -233,7 +238,7 @@
                                         </div>
                                     </li>
                                     <li class="wc_payment_method payment_method_cod">
-                                        <input type="radio" id="payment_method_cod" value="2" name="payment_method">
+                                        <input type="radio" id="payment_method_cod" value="1" name="payment_method">
                                         <label for="payment_method_cod">Trả tiền mặt khi giao hàng </label>
                                         <div class="payment_box payment_method_cod" style="display:none;">
                                             <p>Trả tiền mặt khi giao hàng</p>

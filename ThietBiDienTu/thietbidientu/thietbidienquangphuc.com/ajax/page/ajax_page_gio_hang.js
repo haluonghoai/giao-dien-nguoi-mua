@@ -92,10 +92,3 @@ function removeProductCart(id) {
     renderListProductCart();
 }
 
-function clickBtnThanhToan() {
-    if(checkItemCart()) {
-        location.href = "dathang.html";
-    } else {
-        alertInfo(INFO_CART_NO_PRODUCT);
-    }
-}

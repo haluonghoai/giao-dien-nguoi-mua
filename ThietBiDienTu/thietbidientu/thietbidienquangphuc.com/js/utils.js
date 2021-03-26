@@ -39,3 +39,5 @@ let StringHandle = {
         return data.split('%20').join(' ');
     }
 };
+
+
