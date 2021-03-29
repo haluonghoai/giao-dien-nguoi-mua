@@ -527,7 +527,15 @@ function loginUser() {
             dataType: 'json',
             success:function(rs){
                 let userPassword;
-                userPassword = rs.data[0].password;
+                // Check username
+                if (rs.data === undefined || rs.data.length == 0) {
+                    alert('Username sai');
+                    return;
+                }
+
+                userPassword = rs.data[0].password ;
+                
+                //check password
                 if(password != userPassword) { // check tạm, check cẩn thận thì phải ===
                     alert('Username or Password wrong');
                     return;
@@ -542,11 +550,20 @@ function loginUser() {
                 
             },
             error: function(rs) {
-                alert('Login that bai')
+                alert('Username sai')
             }
         });
     });
 }
+
+function validateNewUser() {
+    var name = fieldName.val();
+    var pass = fieldPass.val();
+    var hoten = fieldHoten.val();
+    var email = fieldEmail.val();
+    var address = fieldAddress.val();
+    var phonenumber = fieldPhone.val();
+}   
 
 function registerUser() {
     // jQuery ajax form submit example, runs when form is submitted 
@@ -613,7 +630,6 @@ function moveToDetailPage(e) {
     productItem = targetEle.closest('.product-inner');
     let idItem = parseInt(productItem.dataset.iddetail);
     
-
 
     $.ajax({
         url: `http://localhost:8080/api/v1/product/find-by-id?id=${idItem}`,
