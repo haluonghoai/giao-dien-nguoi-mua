@@ -29,17 +29,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					
 					<div class="header-left-bottom agileinfo">
 						
-					 <form action="trang-chu.html" method="post">
-						<input type="text"  value="User name" name="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
-					<input type="password"  value="Password" name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
-                    <input type="text"  value="hoten" name="hoten" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'hoten';}"/>
-                    <input type="text"  value="email" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}"/>
-                    <input type="text"  value="diachi" name="diachi" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'diachi';}"/>
-                    <input type="text"  value="sodienthoai" name="sodienthoai" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'sodienthoai';}"/>
+					 <div id="myFormRegister">
+						<input type="text"  value="User name" name="name" id="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User name';}"/>
+						<input type="password"  value="Password" name="password" id="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"/>
+						<input type="text"  value="hoten" name="hoten" id="hoten" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'hoten';}"/>
+						<input type="text"  value="email" name="email" id="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'email';}"/>
+						<input type="text"  value="diachi" name="diachi" id="diachi" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'diachi';}"/>
+						<input type="text"  value="sodienthoai" name="sodienthoai" id="sodienthoai" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'sodienthoai';}"/>
 						<div class="clear"> </div>
 					  </div>
 					   <div class="login" style="text-align:center;">
-						<a href="trang-chu.html" style="color:white">Sign Up</a>
+							<a href="#" class="myBtnRegister" style="color:white">Sign Up</a>
 					   </div>
 					</form>	
 						
@@ -51,5 +51,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 <!--header end here-->
 <!--footer end here-->
+	<script src="ajax/page/ajax_page_base.js"></script>
 </body>
 </html>

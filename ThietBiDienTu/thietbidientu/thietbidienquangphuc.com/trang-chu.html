@@ -22,11 +22,12 @@
                 rel="stylesheet">
         <!-- ============= Bootstrap Css ============= -->
 
-
         <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+
         <!-- ============= Library Css============= -->
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick.css">
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick-theme.css">
+
         <!-- ============= Global Css ============= -->
         <link rel="stylesheet" href="css/global.css">
         <!-- ============= Jquery ============= -->
@@ -34,12 +35,9 @@
         <!-- ============= Font Awesome ============= -->
         <script src="../kit.fontawesome.com/63f35fe35b.js" crossorigin="anonymous"></script>
         <!-- ============= Bootstrap 4 Js ============= -->
-        <script src="../cdn.jsdelivr.net/npm/popper.js%401.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous"></script>
-        <script src="../stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-                crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="plugins/bootstrap-notify/bootstrap-notify.min.css"/>
         <script src="plugins/bootstrap-notify.min.js"></script>
         <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
@@ -75,7 +73,8 @@
                 <div class="header-contact">
                     <a href="login.html" style="padding: 5px; color: rgb(10, 88, 107);">Đăng nhập</a>
                     <a href="dang-ky.html" style="padding: 5px; color: rgb(10, 88, 107);">Đăng ký</a>
-                    <a href="#" class="email link-email-company" target="_blank">
+                    
+                    <!-- <a href="#" class="email link-email-company" target="_blank">
                         <img src="file/icon/important-mail.png" alt="Mail">
                     </a>
                     <a href="#" class="facebook link-facebook-company" target="_blank">
@@ -83,7 +82,7 @@
                     </a>
                     <a href="#" class="youtube link-youtube-company" target="_blank">
                         <img src="file/icon/youtube.png" alt="Youtube">
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>
@@ -93,11 +92,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-lg-3 col-6 d-none d-md-block nav-cate-wrapper">
+               
+                <!-- <span>Danh mục sản phẩm</span> --> 
                 <div class="nav-category">
                     <i class="fas fa-bars"></i>
                     <!-- <span>Danh mục sản phẩm</span> --> 
-
-
                     <span class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Danh mục sản phẩm
@@ -107,6 +106,20 @@
                       </span>
                       
                 </div>
+
+                <!-- <div class="dropdown show nav-category">
+                    <a class="btn btn-secondary btn-lg dropdown-toggle" href="#" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Danh mục sản phẩm
+                    </a>
+                    
+                    <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div> -->
+                
+                
             </div>
             <div class="col-12 col-md-8 col-lg-9">
                 <div class="nav-wrap d-flex justify-content-between align-items-center">
@@ -633,36 +646,10 @@
 </div>
 
 
-    <!-- ============= Import Custom Plugin Body ============= -->
-    <!-- Load Facebook SDK for JavaScript -->
-    <!-- Load Facebook SDK for JavaScript -->
-      <div id="fb-root"></div>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            xfbml            : true,
-            version          : 'v10.0'
-          });
-        };
-
-        (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-
-      <!-- Your Chat Plugin code -->
-      <div class="fb-customerchat"
-        attribution="setup_tool"
-        page_id="106386468194951">
-      </div>
-
       <script src="../code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
       crossorigin="anonymous"></script>
-<script src="../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="js/app_const.js"></script>
       <script src="js/global.js"></script>
       <script src="ajax/ajax_main.js"></script>

@@ -965,6 +965,7 @@ footer .logo-area {
     border-radius: 10px;
     min-height: 285px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .product__img {
@@ -1478,4 +1479,16 @@ span.product-name {
 .product-search__img {
     max-width: 255px;
     max-height: 300px;
+}
+
+
+.dropdown-menu {
+    width: 100%;
+    
+}
+
+.btnLogout {
+    border: 0;
+    margin-left: 10px;
+    padding:7px;
 }

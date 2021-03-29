@@ -8,10 +8,17 @@ let textNameCompany, textSlogan, linkEmailCompany, textEmailCompany, linkFaceboo
 
  let checkItemInCart = false;
 
- let myButtonCart, myButtonThanhtoan;
+ let myButtonCart, myButtonThanhtoan, myButtonDeleteCart;
 
  // Login - Register (Form)
- let fieldUsername, fieldPassword, formLogin, btnLogin;
+ let headerTextAuthen;
+
+ let fieldUsername, fieldPassword, formLogin, btnLogin, btnRegister;
+ let fieldName, fieldPass, fieldHoten, fieldEmail, fieldAddress, fieldPhone;
+
+ // Detail Page
+ let productItem;
+ 
 
 $(function () {
     //textNameCompany = $(".text-name-company");
@@ -44,19 +51,38 @@ $(function () {
     cartNumberCount = $('#slsp-s');
     listProductCart = $("#list-product-cart");
     myButtonCart = $('#myBtnCart');
+    myButtonDeleteCart = $('.btnDeleteCart');
     myButtonThanhtoan = $('#btnThanhtoan');
 
     //Login
+    headerTextAuthen = $('.header-contact');
 
     fieldUsername = $('#myName');
     fieldPassword = $('#myPassword');
+
+    fieldName = $('#name');
+    fieldPass = $('#password');
+    fieldHoten = $('#hoten');
+    fieldEmail = $('#email');
+    fieldAddress = $('#diachi');
+    fieldPhone = $('#sodienthoai');
+
+
+
     formLogin = $('#myForm');
     btnLogin = $('.myBtnLogin');
+    btnRegister = $('.myBtnRegister');
 
     
+    
     loginUser();
-
+    registerUser();
+    
     buttonHandleEvent();
+    buttonHandleDeleteCart();
+    hasUserLogin();
+
+
     activeMenuMain();
     viewNavAndSelectCategorySearch();
     viewNumberCart();
@@ -65,6 +91,10 @@ $(function () {
     showAllProduct();
     viewNav1();
     
+
+    moveToDetailPage();
+    
+
     // bao vut vao day thay
    // addProductToCart();
     //cartNumberCount.html(products.length);
@@ -154,9 +184,10 @@ function viewNav1() {
             for (var i = 0; i < dataArray.length; i++){
                 
                var name = dataArray[i].name;
-               $('#nav_danh_muc').append("<li>"+name+"</li>")
+               var id = parseInt(dataArray[i].id);
+               $('#nav_danh_muc').append(`<li onclick="loadProductByCategory(${id})" data-id="${id}">${name}</li>`)
                
-            };      
+             };      
             }
     }
     )}
@@ -176,27 +207,31 @@ function viewNav1() {
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 console.log(dataArray);
-                $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                $('#list-product').append('<div class="product-inner col-lg-3 my-3" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
             };      
             }
             })
         
     }
 
-    function loadProductByCategory() {
+    function loadProductByCategory(idCategory) {
+
+        $('#list-product').empty();
+
         $.ajax({
-            url: "http://localhost:8080/api/v1/category/find-all",
-        dataType: "json",
-        method: "GET",
+            url:`http://localhost:8080/api/v1/product/find-by-category?idCategory=${idCategory}`,
+            method:"GET",
+            dataType: "json",
             success:function(rs){
             var dataArray = rs["data"];
-                console.log(dataArray.length);
+            
                 for (var i = 0; i < dataArray.length; i++){
-                    // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
-                    $('#list-product').append('<div class="product-inner col-lg-3 my-3"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
-                };      
-                }
-        })
+                    
+                    console.log(dataArray);
+                    $('#list-product').append('<div class="product-inner col-lg-3 my-3" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                };          
+            }
+            })
     }
   
 
@@ -214,7 +249,7 @@ function searchProduct() {
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 $('.search-product').css('display', 'block');
-                $('#list-product-search').append('<div class="product-inner-search my-3"> <div class="product-search__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                $('#list-product-search').append('<div class="product-inner-search my-3" onclick="moveToDetailPage()"> <div class="product-search__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
                 
             };      
             }
@@ -238,7 +273,9 @@ function setItemSessionStorage(key, val) {
     sessionStorage.setItem(key, JSON.stringify(val));
 }
 
-
+/**
+ * Code handle Order and Add to cart
+ */
 
 function addProductToCart(e) {
     e = e || window.event;
@@ -287,7 +324,14 @@ function addProductToCart(e) {
     
     viewNumberCart();
 
-    //the m push len di roi di ngu cho do met
+    
+}
+
+function buttonHandleDeleteCart() {
+    myButtonDeleteCart.on('click', function() {
+        sessionStorage.removeItem('productsItem');
+        window.location.reload();
+    });
 }
 
 function cal(products){
@@ -302,7 +346,7 @@ function cal(products){
     return calculation;
 }
 
-// lam not di dm // past cai ham vao day, cai ham calc vua tinh ys
+
 
 function viewNumberCart() {
     let arrProduct = getItemSessionStorage("productsItem");
@@ -317,7 +361,7 @@ function viewNumberCart() {
     
     handleAnimationCart();
 }
-//t muon vut vao 1 cai no cung chuc nang. kieu nhu render list product thi render luon cai tong
+
 function renderListProductCart() {
     let newCart = getItemSessionStorage("productsItem");
     let viewListProductCart, viewListCalTotal = '';
@@ -377,61 +421,6 @@ function renderListProductCart() {
     listCalTotal.html(viewListCalTotal)
 }
 
-/* async function viewListProductCart() {
-    let newCart = getItemSessionStorage("productsItem");
-    if(newCart && newCart.length > 0) {
-        let listId = newCart.map(data => data.id);
-        await productFindByIdsAndProperties(listId).then(rs => {
-            if(rs) {
-                arrCart = rs.map((data, index) => {
-                    for(let j = 0; j < cart.length; j++) {
-                        if(data.id == cart[j].id) {
-                            data.number = cart[j].number;
-                            return data;
-                        }
-                    }
-                })
-            }
-        }).catch(err => {
-            setItemLocalStorage("cart", []);
-            console.log(err);
-            alertDanger(DANGER_LIST_PRODUCT);
-        })
-    }
-    renderListProductCart();
-    countCost(arrCart);
-} */
-
-/* function renderListProductCart() {
-    let viewListProduct = "";
-    if(arrCart && arrCart.length > 0) {
-        viewListProduct = arrCart.map(data => {
-            let {alias, id, name, promotions, cost, number, quantity, image} = data;
-            let cartProductClone = cartProductTemp.clone();
-            cartProductClone.removeClass("d-none");
-            cartProductClone.find(".remove").attr("onclick", `removeProductCart(${id})`);
-            cartProductClone.attr("id", `product-cart-${id}`);
-            cartProductClone.find(".href-product-cart").attr("href", viewAliasProduct(alias, id));
-            let imgProductClone = cartProductClone.find(".img-product-cart");
-            imgProductClone.attr("src", viewSrcFile(image));
-            imgProductClone.attr("alt", viewField(name));
-            cartProductClone.find(".name-product-cart").html(viewField(name));
-            let {minusPrice} = viewPromotionCostProduct(promotions, cost);
-            cost = cost - minusPrice;
-            cartProductClone.find(".cost-product-cart").html(viewPriceVND(cost));
-            cartProductClone.find(".total-product-cart").html(viewPriceVND(cost * number));
-            let inputProductClone = cartProductClone.find(".input-product-cart");
-            inputProductClone.attr("max", quantity);
-            inputProductClone.val(number);
-            inputProductClone.attr("onchange", `inputChangeProductCart(${id}, ${quantity})`);
-            return cartProductClone;
-        })
-    }
-    listProductCart.html(viewListProduct);
-    runInputSpinner();
-}
-*/
-
 function inputChangeProductCart(id, quantity) {
     let inputQuantity = $(`#product-cart-${id} input[type='text']`);
     let val = inputQuantity.val();
@@ -465,6 +454,42 @@ function activeMenuMain() {
     $(`#nav-main li[data-active='${pathname.slice(1)}']`).addClass("active");
 }
 
+/**
+ * Code handle Authentication
+ */
+function hasUserLogin() {
+    const validLogin = isLoggedIn();
+    const userLogin = JSON.parse(getItemSessionStorage('tokenLoginSuccess'));
+    let userLoginName;
+
+    if(userLogin == null) {
+        userLoginName = 'Username'
+    } else {
+
+        userLoginName = userLogin.username;
+    }
+    //console.log(userLoginName);
+    const userLoginText = `
+        Hello ${userLoginName}
+         <button class="brn btn-info btn-lg btnLogout" onclick="logoutUser()">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    `
+   
+    if(validLogin) {
+        headerTextAuthen.html(userLoginText);
+    }
+
+}
+
+function logoutUser() {
+    if(confirm('Are you sure want to logout ?')) {
+        sessionStorage.removeItem('tokenLoginSuccess');
+        window.location.reload();
+        
+    }
+    return false;
+}
 
 function isLoggedIn() {
     const tokenLogin = getItemSessionStorage('tokenLoginSuccess');
@@ -474,14 +499,14 @@ function isLoggedIn() {
     return true;
 }
 
-function autoRedirect() {
+function autoRedirect(url = null) {
     let validLogin = isLoggedIn();
     
-    if(!validLogin && location.pathname !== '/login.html') {
+    if(!validLogin) {
         window.location = 'login.html';
     }
-    if(validLogin && location.pathname === '/login.html') {
-        window.location = 'dathang.html';
+    if(validLogin) {
+        window.location = url;
     }
 }
 
@@ -510,7 +535,8 @@ function loginUser() {
                     alert('Login Success');
                     setItemSessionStorage('tokenLoginSuccess', JSON.stringify(rs.data[0]));
                     // console.log(btnLogin.attr("href"));
-                    window.location = 'dathang.html';
+                    autoRedirect('dathang.html');
+                    //  window.location = 'dathang.html';
                    // btnLogin.attr("href","gio-hang.html" ); // chua hoan thien
                 }
                 
@@ -522,8 +548,82 @@ function loginUser() {
     });
 }
 
+function registerUser() {
+    // jQuery ajax form submit example, runs when form is submitted 
+    btnRegister.on('click', function(e) { 
+
+        var name = fieldName.val();
+        var pass = fieldPass.val();
+        var hoten = fieldHoten.val();
+        var email = fieldEmail.val();
+        var address = fieldAddress.val();
+        var phonenumber = fieldPhone.val();
+
+        const customerNew = {
+            "name" : name,
+            "email" : email,
+            "adress" : address,
+            "phoneNumber" : phonenumber,
+            "username" : hoten,
+            "password" : pass 
+        }
+     
+        $.ajax({
+            url: `http://localhost:8080/api/v1/customer/add`,
+            type: 'POST',
+            data: customerNew,
+            contentType: "application/json;charset=utf-8",
+            data:
+                JSON.stringify(customerNew)
+            ,
+            success: function (res) {
+                alert('Register success');
+                let userNew = JSON.parse(res);
+                setItemSessionStorage('tokenLoginSuccess', JSON.stringify(userNew.data));
+                autoRedirect('trang-chu.html');
+                console.log(res);
+            },
+            error: function(errorThrown) {
+                alert('Register Fail');
+                console.log(errorThrown);
+            }
+        });
+    });
+}
+
 function buttonHandleEvent() {
     myButtonThanhtoan.on('click', function() {
-        autoRedirect();
+        autoRedirect('dathang.html');
     });
+}
+
+
+
+/**
+ * Code handle Detail Product page
+ */
+function moveToDetailPage(e) {
+    e = e || window.event;
+    let targetEle = e.target;
+
+    if(targetEle.matches('.btn-add-cart')) {
+        return;
+    }
+
+    productItem = targetEle.closest('.product-inner');
+    let idItem = parseInt(productItem.dataset.iddetail);
+    
+
+
+    $.ajax({
+        url: `http://localhost:8080/api/v1/product/find-by-id?id=${idItem}`,
+        dataType: "json",
+        method: "GET",
+        success:function(rs){
+            var dataArray = rs["data"];
+            setItemSessionStorage("productItemDetail", dataArray);
+            window.location = 'chi-tiet-san-pham.html';
+        }
+    });
+    
 }

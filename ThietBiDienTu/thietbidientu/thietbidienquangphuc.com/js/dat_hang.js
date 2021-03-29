@@ -145,13 +145,13 @@ function orderProduct() {
                 JSON.stringify(orderNew)
             ,
             success: function (res) {
-                alert('Dat hang thanh cong');
+                alert('Bạn đã đặt hàng thành công');
                 //alert(res['data'])
                 console.log(res);
                 //window.location.reload();
             },
             error: function(errorThrown) {
-                alert('Dat hang that bai');
+                alert('Đặt hàng thất bại');
                 console.log(errorThrown);
             }
         });
