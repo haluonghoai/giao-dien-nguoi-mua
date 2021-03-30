@@ -446,6 +446,7 @@ function renderListProductCart() {
     listProductCart.html(viewListProductCart);
     listCalTotal.html(viewListCalTotal)
 }
+
 function inputChangeProductCart(e) {
     e = e || window.event;
     let qty = parseInt(e.target.value);
