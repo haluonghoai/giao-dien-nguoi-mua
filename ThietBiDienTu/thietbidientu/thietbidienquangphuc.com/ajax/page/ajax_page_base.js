@@ -408,7 +408,12 @@ function renderListProductCart() {
                                     <span class="cost-product-cart">${item.productPrice}</span>
                                 </td>
                                 <td class="cart-quantity" data-title="Số lượng">
-                                    <span class="cost-product-cart">${item.productQuantity}</span>
+                                    <div class="quantity buttons_added">
+                                    
+                                        <input type="number" id="number" value="${item.productQuantity}" min="1" max="100" step="1" class="input-product-cart" data-id=${index} onchange="inputChangeProductCart()"/>
+                                    
+                                    </div>
+                                    
                                 </td>
                                 <td class="cart-subtotal" data-title="Tổng">
                                     <span class="total-product-cart">${item.productPrice * item.productQuantity}</span>
@@ -441,17 +446,15 @@ function renderListProductCart() {
     listProductCart.html(viewListProductCart);
     listCalTotal.html(viewListCalTotal)
 }
+function inputChangeProductCart(e) {
+    e = e || window.event;
+    let qty = parseInt(e.target.value);
+    let index = parseInt(e.target.dataset.id);
+    products[index].productQuantity = qty;
+    setItemSessionStorage("productsItem", products)
+    //console.log(newCart[index].productQuantity);
+}
 
-// function inputChangeProductCart(id, quantity) {
-//     let inputQuantity = $(`#product-cart-${id} input[type='text']`);
-//     let val = inputQuantity.val();
-//     if(val > 0 && val <= quantity) {
-//         changeNumberProductCart(id, val);
-//     }else if(val == 0) {
-        
-//     }
-//   //  viewNumberCart();
-// }
 
 
 function keypressEnterInputSearchProduct() {

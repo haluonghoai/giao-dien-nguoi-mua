@@ -1458,6 +1458,17 @@ span.product-name {
 /*CUSTOM CSS*/
 
 /*Search Product*/
+
+
+/*CART*/
+
+.input-product-cart {
+    width: 40px;
+}
+/* .operator {
+    width: 20px;
+} */
+
 .search-product {
     display: none;
 }
