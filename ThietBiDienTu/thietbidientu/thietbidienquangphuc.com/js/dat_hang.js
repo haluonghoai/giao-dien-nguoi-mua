@@ -121,28 +121,24 @@ function orderProduct() {
         });
         // testing: console.log(productOrderArray);
 
-        // create new Order
-        const orderNew = {
-            "order" : {
-                "timecreate" : "",
-                "note" : "Giao hàng cẩn thận",
-                "idUser" :1,
-                "idCustomer": userDetails.id,
-                "idOrderstatus" :1,
-                "statusPaments" : false,
-                "payments" : paymentMethod ? true : false
-            },
-            "orderDetailsList": productOrderArray
-            
-        }
+        var orderNew = new Object();
+        orderNew.note =  'Giao hàng cẩn thận';
+        orderNew.idUser = 13;
+        orderNew.idCustomer =  userDetails.id;
+        orderNew.idOrderstatus = 1,
+        orderNew.statusPaments = false;
+        orderNew.payments = paymentMethod ? true : false;
+        var orderDTO = new Object();
+        orderDTO.order = orderNew;
+        orderDTO.orderDetailsList = productOrderArray;
+
         //console.log(productDetials);
         $.ajax({
             url: `http://localhost:8080/api/v1/order/addPurchase`,
             type: 'POST',
-            data: orderNew,
             contentType: "application/json;charset=utf-8",
             data:
-                JSON.stringify(orderNew)
+                JSON.stringify(orderDTO)
             ,
             success: function (res) {
                 alert('Bạn đã đặt hàng thành công');
