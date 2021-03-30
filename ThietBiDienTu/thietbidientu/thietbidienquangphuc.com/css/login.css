@@ -814,3 +814,6 @@ span.sin-color {
   border-radius: 4px;
   margin: 5px;
 }
+#myFormRegister label {
+  color: #fff;
+}

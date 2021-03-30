@@ -113,3 +113,11 @@ table  thead tr th{
     border-bottom: 1px solid #ddd;
     padding-left: 5px;
   }
+
+
+.btnDeleteItem {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #7f8c8d;
+}

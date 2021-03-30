@@ -80,6 +80,7 @@ $(function () {
     
     buttonHandleEvent();
     buttonHandleDeleteCart();
+    buttonHandleDeleteItem();
     hasUserLogin();
 
 
@@ -334,6 +335,26 @@ function buttonHandleDeleteCart() {
     });
 }
 
+function removeProduct(e) {
+   
+    if(e.target.matches('.btnDeleteItem')) {
+        const el = e.target;
+        const delIndex = parseInt(el.dataset.idItem);
+        products.splice(delIndex, 1);
+        setItemSessionStorage("productsItem", products);
+        window.location.reload();
+    }
+    return;
+
+}
+function buttonHandleDeleteItem() {
+
+    listProductCart.on('click', function(e) {
+        removeProduct(e);
+    })
+
+}
+
 function cal(products){
     var calculation = {
         amount : 0,
@@ -370,10 +391,10 @@ function renderListProductCart() {
     if(newCart && newCart.length > 0) {
         console.log('hello render');
         //render list
-        viewListProductCart = newCart.map(item => {
+        viewListProductCart = newCart.map((item, index) => {
             return ` <tr class="cart_item" id="cart-product-new">
                                 <td class="cart-premove">
-                                    <span class="remove" title="Xóa sản phẩm này" onclick="removeProductCart()">×</span>
+                                    <button class="btnDeleteItem" title="Xóa sản phẩm này" data-idItem=${index}">x</button>
                                 </td>
                                 <td class="cart-img">
                                     <a href="#" class="href-product-cart">
@@ -421,16 +442,16 @@ function renderListProductCart() {
     listCalTotal.html(viewListCalTotal)
 }
 
-function inputChangeProductCart(id, quantity) {
-    let inputQuantity = $(`#product-cart-${id} input[type='text']`);
-    let val = inputQuantity.val();
-    if(val > 0 && val <= quantity) {
-        changeNumberProductCart(id, val);
-    }else if(val == 0) {
-        removeProductCart(id);
-    }
-  //  viewNumberCart();
-}
+// function inputChangeProductCart(id, quantity) {
+//     let inputQuantity = $(`#product-cart-${id} input[type='text']`);
+//     let val = inputQuantity.val();
+//     if(val > 0 && val <= quantity) {
+//         changeNumberProductCart(id, val);
+//     }else if(val == 0) {
+        
+//     }
+//   //  viewNumberCart();
+// }
 
 
 function keypressEnterInputSearchProduct() {
@@ -529,7 +550,11 @@ function loginUser() {
                 let userPassword;
                 // Check username
                 if (rs.data === undefined || rs.data.length == 0) {
-                    alert('Username sai');
+                    fieldUsername.val('Username sai');
+                    fieldUsername.css({'border-color': 'red', 'color': 'red'});
+                    fieldUsername.focus(function() {
+                        fieldUsername.val('');
+                    })
                     return;
                 }
 
@@ -563,6 +588,44 @@ function validateNewUser() {
     var email = fieldEmail.val();
     var address = fieldAddress.val();
     var phonenumber = fieldPhone.val();
+ 
+    if(name == '') {
+        fieldName.val('Tên không được để trống');
+        fieldName.css({'border-color': 'red', 'color': 'red'});
+        fieldName.focus(function() {
+            fieldName.val('');
+        })
+        return false;
+    }
+
+    if(pass == '') {
+        fieldPass.val('Password không được để trống');
+        fieldPass.css({'border-color': 'red', 'color': 'red'});
+        fieldPass.focus(function() {
+            fieldPass.val('');
+        })
+        return false;
+    }
+
+    if(hoten == '') {
+        fieldHoten.val('Username không được để trống');
+        fieldHoten.css({'border-color': 'red', 'color': 'red'});
+        fieldHoten.focus(function() {
+            fieldHoten.val('');
+        })
+        return false;
+    }
+
+    if(email == '') {
+        fieldEmail.val('Email không được để trống');
+        fieldEmail.css({'border-color': 'red', 'color': 'red'});
+        fieldEmail.focus(function() {
+            fieldEmail.val('');
+        })
+        return false;
+    }
+
+    return true;
 }   
 
 function registerUser() {
@@ -576,35 +639,45 @@ function registerUser() {
         var address = fieldAddress.val();
         var phonenumber = fieldPhone.val();
 
-        const customerNew = {
-            "name" : name,
-            "email" : email,
-            "adress" : address,
-            "phoneNumber" : phonenumber,
-            "username" : hoten,
-            "password" : pass 
+        const validValidate = validateNewUser();
+
+        if(!validValidate) {
+            alert('Sai');
+            return;
         }
-     
-        $.ajax({
-            url: `http://localhost:8080/api/v1/customer/add`,
-            type: 'POST',
-            data: customerNew,
-            contentType: "application/json;charset=utf-8",
-            data:
-                JSON.stringify(customerNew)
-            ,
-            success: function (res) {
-                alert('Register success');
-                let userNew = JSON.parse(res);
-                setItemSessionStorage('tokenLoginSuccess', JSON.stringify(userNew.data));
-                autoRedirect('trang-chu.html');
-                console.log(res);
-            },
-            error: function(errorThrown) {
-                alert('Register Fail');
-                console.log(errorThrown);
+        
+            
+            const customerNew = {
+                "name" : name,
+                "email" : email,
+                "adress" : address,
+                "phoneNumber" : phonenumber,
+                "username" : hoten,
+                "password" : pass 
             }
-        });
+         
+            $.ajax({
+                url: `http://localhost:8080/api/v1/customer/add`,
+                type: 'POST',
+                data: customerNew,
+                contentType: "application/json;charset=utf-8",
+                data:
+                    JSON.stringify(customerNew)
+                ,
+                success: function (res) {
+                    alert('Register success');
+                    let userNew = JSON.parse(res);
+                    setItemSessionStorage('tokenLoginSuccess', JSON.stringify(userNew.data));
+                    autoRedirect('trang-chu.html');
+                    console.log(res);
+                },
+                error: function(errorThrown) {
+                    alert('Register Fail');
+                    console.log(errorThrown);
+                }
+            });
+        
+
     });
 }
 
