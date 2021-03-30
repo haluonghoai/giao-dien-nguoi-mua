@@ -962,7 +962,7 @@ footer .logo-area {
     -webkit-box-shadow: 5px 5px 10px #999;
     -moz-box-shadow: 5px 5px 10px #999;
     box-shadow: 5px 5px 10px #999;
-    border-radius: 10px;
+    border-radius: 7px;
     min-height: 285px;
     overflow: hidden;
     cursor: pointer;
@@ -1502,4 +1502,12 @@ span.product-name {
     border: 0;
     margin-left: 10px;
     padding:7px;
+}
+
+.customer-note {
+    margin: 10px 0;
+}
+.customer-note label {
+    font-size: 18px;
+    font-weight: 700;
 }

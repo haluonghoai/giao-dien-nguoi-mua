@@ -2,7 +2,7 @@ let listProductTotal;
 let customerDetail;
 let buttonOrder;
 // let paymentByBank, paymentByCash;
-let paymentMethodsRadio;
+let paymentMethodsRadio, noteByCustomer;
 
 $(function () {
 
@@ -12,6 +12,7 @@ $(function () {
     btnOrder = $('#btn-order');
 
     paymentMethodsRadio = $("input:radio[name='payment_method']");
+    noteByCustomer = $("textarea[name='note']");
     // paymentByBank = $('#payment_method_bacs');
     // paymentByCash = $('#payment_method_cod');
 
@@ -100,6 +101,8 @@ function renderListCustomer() {
 
 function orderProduct() {
     btnOrder.on('click', function() {
+
+        
         let paymentMethod;
         let userDetails = JSON.parse(getItemSessionStorage('tokenLoginSuccess'));
         let productDetials = getItemSessionStorage('productsItem');
@@ -122,11 +125,11 @@ function orderProduct() {
         // testing: console.log(productOrderArray);
 
         var orderNew = new Object();
-        orderNew.note =  'Giao hàng cẩn thận';
-        orderNew.idUser = 13;
+        orderNew.note =  noteByCustomer.val();
+        orderNew.idUser = 1;
         orderNew.idCustomer =  userDetails.id;
-        orderNew.idOrderstatus = 1,
-        orderNew.statusPaments = false;
+        orderNew.idOrderstatus = 1, // bên admin set
+        orderNew.statusPaments = false; // false: mặc định là chưa thanh toán
         orderNew.payments = paymentMethod ? true : false;
         var orderDTO = new Object();
         orderDTO.order = orderNew;
