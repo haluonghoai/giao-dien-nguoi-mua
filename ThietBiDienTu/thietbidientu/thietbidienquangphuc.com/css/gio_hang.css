@@ -46,6 +46,8 @@ table  thead tr th{
 .cart-name  a,.cart-price span,.cart-subtotal span{
     color: var(--main-color);
     font-size: 1.2rem;
+    text-align: left;
+    display: block;
     font-weight: 600;
 }
 

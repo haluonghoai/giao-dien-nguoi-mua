@@ -393,9 +393,6 @@ function renderListProductCart() {
         //render list
         viewListProductCart = newCart.map((item, index) => {
             return ` <tr class="cart_item" id="cart-product-new">
-                                <td class="cart-premove">
-                                    <button class="btnDeleteItem" title="Xóa sản phẩm này" data-idItem=${index}">x</button>
-                                </td>
                                 <td class="cart-img">
                                     <a href="#" class="href-product-cart">
                                         <img src="${item.productImage}" alt="" class="img-product-cart">
@@ -417,6 +414,9 @@ function renderListProductCart() {
                                 </td>
                                 <td class="cart-subtotal" data-title="Tổng">
                                     <span class="total-product-cart">${item.productPrice * item.productQuantity}</span>
+                                </td>
+                                <td class="cart-premove" data-title="Xóa">
+                                    <button class="btnDeleteItem" title="Xóa sản phẩm này" data-idItem=${index}">x</button>
                                 </td>
                      </tr>
             `;

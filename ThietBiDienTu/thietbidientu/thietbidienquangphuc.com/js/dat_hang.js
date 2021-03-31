@@ -4,6 +4,13 @@ let buttonOrder;
 // let paymentByBank, paymentByCash;
 let paymentMethodsRadio, noteByCustomer;
 
+
+window.onload = function() {
+    if(location.pathname === 'dathang.html') {
+        userMustLogin('dathang.html');
+    }
+}
+
 $(function () {
 
 
@@ -16,10 +23,23 @@ $(function () {
     // paymentByBank = $('#payment_method_bacs');
     // paymentByCash = $('#payment_method_cod');
 
+   
     orderProduct();
     renderListProductPayment();
     renderListCustomer();
 })
+
+
+function userMustLogin(url = null) {
+    let validLogin = isLoggedIn();
+    
+    if(!validLogin) {
+        window.location = 'login.html';
+    }
+    if(validLogin) {
+        window.location = url;
+    }
+}
 
 
 function renderListProductPayment() {
