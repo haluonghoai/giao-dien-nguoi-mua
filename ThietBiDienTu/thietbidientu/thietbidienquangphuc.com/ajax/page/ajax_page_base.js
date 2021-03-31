@@ -629,6 +629,24 @@ function validateNewUser() {
         return false;
     }
 
+    if(address == '') {
+        fieldAddress.val('Địa chỉ không được để trống');
+        fieldAddress.css({'border-color': 'red', 'color': 'red'});
+        fieldAddress.focus(function() {
+            fieldAddress.val('');
+        })
+        return false;
+    }
+
+    if(phonenumber == '') {
+        fieldPhone.val('Số điện thoại không được để trống');
+        fieldPhone.css({'border-color': 'red', 'color': 'red'});
+        fieldPhone.focus(function() {
+            fieldPhone.val('');
+        })
+        return false;
+    }
+
     return true;
 }   
 
@@ -646,7 +664,7 @@ function registerUser() {
         const validValidate = validateNewUser();
 
         if(!validValidate) {
-            alert('Sai');
+        
             return;
         }
         
@@ -687,7 +705,13 @@ function registerUser() {
 
 function buttonHandleEvent() {
     myButtonThanhtoan.on('click', function() {
-        autoRedirect('dathang.html');
+        if(products == undefined || !products.length) {
+            alert('Giỏ hàng đang trống, bạn hãy mua hàng đi');
+            return;
+        } else {
+            autoRedirect('dathang.html');
+        }
+
     });
 }
 

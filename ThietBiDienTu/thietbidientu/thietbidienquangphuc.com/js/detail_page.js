@@ -56,7 +56,7 @@ function renderDetailPage() {
                                             <input class="plus is-form" type="button" value="+" style="padding: 5px 25px 35px 15px;
                                             font-size: 20px;">
                                         </div>
-                                        <button class="brn btn-danger buynow" onclick="addToCartHasNumber()" style="padding:7px; margin-left:20px">Mua ngay</button>
+                                        <button class="brn btn-danger buynow" onclick="${productDetailItem.status ? 'addToCartHasNumber()' : 'alertHetHang()'}" style="padding:7px; margin-left:20px">${productDetailItem.status ? 'Mua ngay' : 'Hết hàng'}</button>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,12 @@ function renderDetailPage() {
     
 }
 
+function alertHetHang() {
+    alert('Sản phẩm này đã hết hàng, mong quý khách thông cảm !');
+}
+
 function addToCartHasNumber() {
+
 
     const productDetailItem = getItemSessionStorage("productItemDetail");
 

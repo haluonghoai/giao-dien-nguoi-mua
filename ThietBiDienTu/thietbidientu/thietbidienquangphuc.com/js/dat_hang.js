@@ -146,7 +146,7 @@ function orderProduct() {
 
         var orderNew = new Object();
         orderNew.note =  noteByCustomer.val();
-        orderNew.idUser = 1;
+        orderNew.idUser = 13; // kiểm tra xem bảng nguoidung co id này ko
         orderNew.idCustomer =  userDetails.id;
         orderNew.idOrderstatus = 1, // bên admin set
         orderNew.statusPaments = false; // false: mặc định là chưa thanh toán
