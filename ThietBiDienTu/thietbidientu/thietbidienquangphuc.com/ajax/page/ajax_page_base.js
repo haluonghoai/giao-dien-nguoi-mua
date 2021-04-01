@@ -710,6 +710,7 @@ function registerUser() {
 
 function buttonHandleEvent() {
     myButtonThanhtoan.on('click', function() {
+        
         if(products == undefined || !products.length) {
             $('#cartModal').modal('show');
             return;
