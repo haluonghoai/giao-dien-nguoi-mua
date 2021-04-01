@@ -4,6 +4,8 @@ let buttonOrder;
 // let paymentByBank, paymentByCash;
 let paymentMethodsRadio, noteByCustomer;
 
+const orderSuccess = {};
+
 
 window.onload = function() {
     if(location.pathname === 'dathang.html') {
@@ -25,6 +27,7 @@ $(function () {
 
    
     orderProduct();
+    fireEventHandler();
     renderListProductPayment();
     renderListCustomer();
 })
@@ -144,13 +147,10 @@ function orderProduct() {
         orderDTO.orderDetailsList = productOrderArray;
 
 
-        // Order success
-        const orderSuccess = {
-            "note" : noteByCustomer.val(),
-            "payments": paymentText,
-            "orderStatus": "Chưa xác nhận"
-        }
-        
+        // Order success push payment
+        orderSuccess.note = noteByCustomer.val();
+        orderSuccess.payments = paymentText;
+        orderSuccess.orderStatus = "Chưa xác nhận";
         
         //console.log(productDetails);
         $.ajax({
@@ -161,20 +161,26 @@ function orderProduct() {
             JSON.stringify(orderDTO)
             ,
             success: function (res) {
-                //alert('Bạn đã đặt hàng thành công');
-
-                // Order success
-                setItemSessionStorage('productOrderSuccess', [...products])
-                setItemSessionStorage('noteOrderSuccess', orderSuccess);
-                sessionStorage.removeItem('productsItem');
+                // alert('Bạn đã đặt hàng thành công');
                 console.log(res);
-                window.location = 'dat-hang-thanh-cong.html';
-                //window.location.reload();
-            },
-            error: function(errorThrown) {
-                alert('Đặt hàng thất bại');
-                console.log(errorThrown);
+                let validData = JSON.parse(res);
+                if(validData.data === false) {
+                    $('#orderFailModal').modal('show');
+                } else {          
+                        // Order success
+                        $('#orderSuccessModal').modal('show');
+                }             
             }
+           
         });
+    });
+}
+function fireEventHandler() {
+    $("#closeNotifyOrder").on("click", function () {
+        
+        setItemSessionStorage('productOrderSuccess', [...products]);
+        setItemSessionStorage('noteOrderSuccess', orderSuccess);
+        sessionStorage.removeItem('productsItem');
+        window.location = 'dat-hang-thanh-cong.html';
     });
 }
