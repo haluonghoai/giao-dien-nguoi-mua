@@ -23,11 +23,11 @@
         <!-- ============= Bootstrap Css ============= -->
 
 
-        <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
         <!-- ============= Library Css============= -->
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick.css">
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick-theme.css">
         <!-- ============= Global Css ============= -->
+        <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
         <link rel="stylesheet" href="css/global.css">
         <!-- ============= Jquery ============= -->
         <script src="../code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -157,7 +157,7 @@
 <section class="payment">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-7 cart-bor">
+            <div class="col-12 col-md-6 cart-bor">
                 <div class="customer-detail">
                     <h3 class="cd-title">Thông tin thanh toán</h3>
                     <div class="customer-field">
@@ -190,15 +190,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-6">
                 <div class="checkout-order">
                     <div class="checkout-sidebar">
                         <h3>Đơn hàng của bạn</h3>
-                        <div id="order_review" class="">
+                        <div id="order_review" class="order-preview">
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
+                                    <th>STT</th>
                                     <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
                                     <th>Tạm tính</th>
                                 </tr>
                                 </thead>
@@ -217,7 +219,7 @@
                                     </tr>
 
                                     <tr class="order-total">
-                                        <th>Tổng</th>
+                                        <th colspan="2">Tổng</th>
                                         <td>
                                             <span class="sum-cost" id="sum-cost">4.395.000 VNĐ</span>
                                         </td>
@@ -227,7 +229,7 @@
                             </table>
                             <div class="customer-note">
                                 <label for="note">Ghi chú</label>
-                                <textarea name="note" id="note" cols="60" rows="6"></textarea>
+                                <textarea class="form-control" name="note" id="note" cols="50" rows="5"></textarea>
                             </div>
                             <div class="checkout-payment">
                                 <ul class="payment_methods ">

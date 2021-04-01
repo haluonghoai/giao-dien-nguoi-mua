@@ -207,7 +207,7 @@ function viewNav1() {
         
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
-                console.log(dataArray);
+               
                 $('#list-product').append('<div class="col-lg-3 my-3"><div class="product-inner p-2" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-danger btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div></div>')
             };      
             }
@@ -261,7 +261,11 @@ function searchProduct() {
 }
 
 
-// ADD TO CART NEW
+// Helper function
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 function getItemSessionStorage(key) {
@@ -402,18 +406,18 @@ function renderListProductCart() {
                                     <a href="#" class="href-product-cart name-product-cart">${item.productName}</a>
                                 </td>
                                 <td class="cart-price  d-none d-md-block" data-title="Giá">
-                                    <span class="cost-product-cart">${item.productPrice}</span>
+                                    <span class="cost-product-cart">${numberWithCommas(item.productPrice)}</span>
                                 </td>
                                 <td class="cart-quantity" data-title="Số lượng">
                                     <div class="quantity buttons_added">
                                     
                                         <input type="number" id="number" value="${item.productQuantity}" min="1" max="100" step="1" class="input-product-cart" data-id=${index} onchange="inputChangeProductCart()"/>
-                                    
+
                                     </div>
                                     
                                 </td>
                                 <td class="cart-subtotal" data-title="Tổng">
-                                    <span class="total-product-cart">${item.productPrice * item.productQuantity}</span>
+                                    <span class="total-product-cart">${numberWithCommas(item.productPrice * item.productQuantity)}</span>
                                 </td>
                                 <td class="cart-premove" data-title="Xóa">
                                     <button class="btnDeleteItem" title="Xóa sản phẩm này" data-idItem=${index}">x</button>
@@ -429,13 +433,13 @@ function renderListProductCart() {
             <tr class="cart-psubtotal">
                 <th>Tạm tính</th>
                 <td data-title="Tạm tính" id="tam-tinh">
-                    <span id="temp-sum-total">${cal(newCart).amountTemp}</span>
+                    <span id="temp-sum-total">${numberWithCommas(cal(newCart).amountTemp)}</span>
                 </td>
             </tr>
             <tr class="order-total">
                 <th>Tổng</th>
                 <td data-title="Tổng" id="tong-tien">
-                    <span id="sum-total">${cal(newCart).amount}</span>
+                    <span id="sum-total">${numberWithCommas(cal(newCart).amount)}</span>
                 </td>
             </tr>
         `;
@@ -453,6 +457,7 @@ function inputChangeProductCart(e) {
     let index = parseInt(e.target.dataset.id);
     products[index].productQuantity = qty;
     setItemSessionStorage("productsItem", products)
+    window.location.reload();
     //console.log(newCart[index].productQuantity);
 }
 

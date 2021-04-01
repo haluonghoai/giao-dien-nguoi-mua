@@ -117,7 +117,7 @@ header {
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 101;
+    z-index: 3001;
 }
 
 .logo-area {
@@ -259,7 +259,7 @@ nav {
     position: sticky;
     top: 50px;
     left: 0;
-    z-index: 101;
+    z-index: 3001;
     -webkit-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.75);
@@ -1504,10 +1504,38 @@ span.product-name {
     padding:7px;
 }
 
+
 .customer-note {
     margin: 10px 0;
 }
 .customer-note label {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
 }
+.customer-note textarea {
+    font-size: 16px;
+}
+
+.table td, .table th {
+    padding: 8px 4px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+
+}
+.order-preview .table td {
+    text-align: center;
+
+}
+#btn-order {
+    padding: 5px 10px;
+    font-size: 16px;
+}
+
+.time-order {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 3px;
+    background: rgba(141,154,169,.21);
+    color: rgba(0,0,0,.54);
+}
+

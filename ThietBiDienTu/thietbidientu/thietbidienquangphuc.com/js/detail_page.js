@@ -47,7 +47,7 @@ function renderDetailPage() {
                                         ${productDetailItem.specification}
                                     </div>
                                     <br>
-                                    <div class="pdc-inbut">
+                                    <div class="pdc-inbut" style="display:${productDetailItem.status ? 'block' : 'none'}">
                                         <div class="buttons_added">
                                             <input class="minus is-form" type="button" value="-" style="padding: 0px 20px 40px 20px;
                                             font-size: 30px;">
@@ -56,7 +56,7 @@ function renderDetailPage() {
                                             <input class="plus is-form" type="button" value="+" style="padding: 5px 25px 35px 15px;
                                             font-size: 20px;">
                                         </div>
-                                        <button class="brn btn-danger buynow" onclick="${productDetailItem.status ? 'addToCartHasNumber()' : 'alertHetHang()'}" style="padding:7px; margin-left:20px">${productDetailItem.status ? 'Mua ngay' : 'Hết hàng'}</button>
+                                        <button class="brn btn-danger buynow" onclick="addToCartHasNumber()" style="padding:7px; margin-left:20px">Mua ngay</button>
                                     </div>
                                 </div>
                             </div>
@@ -66,10 +66,6 @@ function renderDetailPage() {
      productDetailSection.html(viewListDetailItem);
      return productDetailSection;
     
-}
-
-function alertHetHang() {
-    alert('Sản phẩm này đã hết hàng, mong quý khách thông cảm !');
 }
 
 function addToCartHasNumber() {
