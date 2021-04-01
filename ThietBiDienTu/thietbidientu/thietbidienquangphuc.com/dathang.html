@@ -227,8 +227,17 @@
                             </div>
                             <div class="checkout-payment">
                                 <ul class="payment_methods ">
+
+                                    <li class="wc_payment_method payment_method_cod">
+                                        <input type="radio" id="payment_method_cod" value="0" name="payment_method">
+                                        <label for="payment_method_cod">Trả tiền mặt khi giao hàng </label>
+                                        <div class="payment_box payment_method_cod" style="display:none;">
+                                            <p>Trả tiền mặt khi giao hàng</p>
+                                        </div>
+                                    </li>
+                                    
                                     <li class="">
-                                        <input type="radio" id="payment_method_bacs" value="0" name="payment_method" checked="checked">
+                                        <input type="radio" id="payment_method_bacs" value="1" name="payment_method" checked="checked">
                                         <label for="payment_method_bacs">Chuyển khoản qua ngân hàng</label>
                                         <div class="payment_box payment_method_bacs">
                                             <p>Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi.
@@ -237,13 +246,7 @@
                                                 tới khi tiền được gửi vào tài khoản của chúng tôi.</p>
                                         </div>
                                     </li>
-                                    <li class="wc_payment_method payment_method_cod">
-                                        <input type="radio" id="payment_method_cod" value="1" name="payment_method">
-                                        <label for="payment_method_cod">Trả tiền mặt khi giao hàng </label>
-                                        <div class="payment_box payment_method_cod" style="display:none;">
-                                            <p>Trả tiền mặt khi giao hàng</p>
-                                        </div>
-                                    </li>
+                                    
                                 </ul>
                                 <div class="place-order">
                                     <div class="checkout_coupon">

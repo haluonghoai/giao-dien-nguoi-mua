@@ -137,7 +137,7 @@ function orderProduct() {
 
         var orderNew = new Object();
         orderNew.note =  noteByCustomer.val();
-        orderNew.idUser = 1; // kiểm tra xem bảng nguoidung co id này ko
+        orderNew.idUser = 13; // kiểm tra xem bảng nguoidung co id này ko
         orderNew.idCustomer =  userDetails.id;
         orderNew.idOrderstatus = 1, // bên admin set
         orderNew.statusPaments = false; // false: mặc định là chưa thanh toán
@@ -147,7 +147,7 @@ function orderProduct() {
         orderDTO.orderDetailsList = productOrderArray;
 
 
-        // Order success push payment
+        // Order success push to Session
         orderSuccess.note = noteByCustomer.val();
         orderSuccess.payments = paymentText;
         orderSuccess.orderStatus = "Chưa xác nhận";
@@ -161,13 +161,12 @@ function orderProduct() {
             JSON.stringify(orderDTO)
             ,
             success: function (res) {
-                // alert('Bạn đã đặt hàng thành công');
+                
                 console.log(res);
                 let validData = JSON.parse(res);
                 if(validData.data === false) {
                     $('#orderFailModal').modal('show');
                 } else {          
-                        // Order success
                         $('#orderSuccessModal').modal('show');
                 }             
             }
@@ -177,7 +176,6 @@ function orderProduct() {
 }
 function fireEventHandler() {
     $("#closeNotifyOrder").on("click", function () {
-        
         setItemSessionStorage('productOrderSuccess', [...products]);
         setItemSessionStorage('noteOrderSuccess', orderSuccess);
         sessionStorage.removeItem('productsItem');

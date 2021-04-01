@@ -326,7 +326,7 @@ function addProductToCart(e) {
 
   
     setItemSessionStorage("productsItem", products);
-    
+
     viewNumberCart();
 
     
@@ -711,7 +711,7 @@ function registerUser() {
 function buttonHandleEvent() {
     myButtonThanhtoan.on('click', function() {
         if(products == undefined || !products.length) {
-            alert('Giỏ hàng đang trống, bạn hãy mua hàng đi');
+            $('#cartModal').modal('show');
             return;
         } else {
             autoRedirect('dathang.html');
