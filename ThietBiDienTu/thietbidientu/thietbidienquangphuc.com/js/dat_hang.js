@@ -137,7 +137,7 @@ function orderProduct() {
 
         var orderNew = new Object();
         orderNew.note =  noteByCustomer.val();
-        orderNew.idUser = 13; // kiểm tra xem bảng nguoidung co id này ko
+        orderNew.idUser = 1; // kiểm tra xem bảng nguoidung co id này ko
         orderNew.idCustomer =  userDetails.id;
         orderNew.idOrderstatus = 1, // bên admin set
         orderNew.statusPaments = false; // false: mặc định là chưa thanh toán
@@ -148,11 +148,10 @@ function orderProduct() {
 
 
         // Order success push to Session
-        orderSuccess.note = noteByCustomer.val();
-        orderSuccess.payments = paymentText;
-        orderSuccess.orderStatus = "Chưa xác nhận";
+       
         
         //console.log(productDetails);
+
         $.ajax({
             url: `http://localhost:8080/api/v1/order/addPurchase`,
             type: 'POST',
@@ -161,10 +160,20 @@ function orderProduct() {
             JSON.stringify(orderDTO)
             ,
             success: function (res) {
-                
+
                 console.log(res);
                 let validData = JSON.parse(res);
-                if(validData.data === false) {
+                let {idOrderstatus, note} = validData.data.order;
+                let idOrder = validData.data.orderDetails[0].idOrder;
+                //console.log(idOrder);
+                
+                // push value to orderSuccess;
+                orderSuccess.note = note;
+                orderSuccess.payments = paymentText;
+                orderSuccess.orderStatus = idOrderstatus ? 'Chưa xác nhận' : 'Đã xác nhận';
+                orderSuccess.idOrder = idOrder;
+
+                if(validData.data.check === false) {
                     $('#orderFailModal').modal('show');
                 } else {          
                         $('#orderSuccessModal').modal('show');

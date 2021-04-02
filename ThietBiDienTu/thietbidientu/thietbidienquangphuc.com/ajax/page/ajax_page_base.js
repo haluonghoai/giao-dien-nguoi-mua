@@ -286,49 +286,57 @@ function addProductToCart(e) {
     e = e || window.event;
 
    
-
     let productID = parseInt(e.target.dataset.id);
     let productName = e.target.dataset.name;
     let productPrice = e.target.dataset.price;
     let productImage = e.target.dataset.image;
+    let productQuantity = 1;
 
-    
-    //check quantity
-    checkItemInCart = products.filter(data => {
-        
-        return data.productID === productID ;
-    })
 
-    const product = {
-                productID,
-                productName,
-                productPrice,
-                productImage,
-                productQuantity: 1
-    };
-    // check item co roi thi quantity += 1
-    //ham onload dau ? viet di xong t onload
-    //the m viet sang 1 file khac roi nhung no vao n
-    // tu tu dat ho cai de bug
-    // moi lan xoa session reffresh lai trang di dang bi code thg kia de len
-    //ok ?, ke dau buoi, do m chay dc day
-    // ao vlon :)). chan ban lam master javascriup the nay thi ong :v 
-    if(checkItemInCart.length > 0){
-        
-        products.forEach(p => {
-            if(p.productID === productID) {
-                p.productQuantity += 1;
+    $.ajax({
+        url: `http://localhost:8080/api/v1/product/checkStock?id=${productID}`,
+        dataType: "json",
+        method: "GET",
+        success:function(res){
+
+            const amountStock = res.data;
+            
+            if(amountStock - productQuantity < 0) {
+                 alert('Số lượng hàng không đủ');
+                
+            } else {
+                     //check quantity
+                    checkItemInCart = products.filter(data => {
+                        
+                        return data.productID === productID ;
+                    })
+
+                    const product = {
+                                productID,
+                                productName,
+                                productPrice,
+                                productImage,
+                                productQuantity
+                    };
+                
+                    if(checkItemInCart.length > 0){
+                        
+                        products.forEach(p => {
+                            if(p.productID === productID) {
+                                p.productQuantity += 1;
+                            }
+                        })
+                    }
+                    else
+                        products.push(product);
+
+                    setItemSessionStorage("productsItem", products);
+
+                    viewNumberCart();
+                }
+                    
             }
-        })
-    }
-    else
-        products.push(product);
-
-  
-    setItemSessionStorage("productsItem", products);
-
-    viewNumberCart();
-
+    });
     
 }
 

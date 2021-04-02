@@ -17,6 +17,9 @@ table  thead tr th{
     font-size: 24px;
     margin: 5px 0;
 }
+.info-order span {
+    color: #e74c3c;
+}
 
 .order-success .table td{
     text-align: center;

@@ -1,6 +1,6 @@
 let listOrderTotal;
 let listCustomerDetail;
-let timeOrder;
+let timeOrder, infoOrderView;
 
 // let paymentByBank, paymentByCash;
 let paymentMethod, noteByCustomer;
@@ -13,15 +13,31 @@ $(function () {
     listOrderTotal = $('#list-product-total');
     timeOrder = $('.time-order-box');
 
+
     listCustomerNote = $('.customer-note');
     paymentMethod = $("#payment-method");
     noteByCustomer = $("#note-by-customer");
+    infoOrderView = $(".info-order-view")
+
+
 
     renderListOrderDetailPayment();
     renderListOrderCustomer();
     renderNoteAndPayment();
     renderTimeOrder();
+    renderInfoOrder();
 })
+
+function renderInfoOrder() {
+    let informationOrder = getItemSessionStorage("noteOrderSuccess");
+    let listInfoOrder = '';
+
+    listInfoOrder = `
+        <h3 class="info-order">Thông tin đơn hàng | Số <span>${informationOrder.idOrder}</span></h3>    
+    `;
+    infoOrderView.html(listInfoOrder);
+    return infoOrderView;
+}
 
 function renderTimeOrder() {
     let listTime = '';
