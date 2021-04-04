@@ -47,7 +47,7 @@ function renderDetailPage() {
                                         ${productDetailItem.specification}
                                     </div>
                                     <br>
-                                    <div class="pdc-inbut">
+                                    <div class="pdc-inbut" style="display:${productDetailItem.status ? 'block' : 'none'}">
                                         <div class="buttons_added">
                                             <input class="minus is-form" type="button" value="-" style="padding: 0px 20px 40px 20px;
                                             font-size: 30px;">
@@ -56,7 +56,7 @@ function renderDetailPage() {
                                             <input class="plus is-form" type="button" value="+" style="padding: 5px 25px 35px 15px;
                                             font-size: 20px;">
                                         </div>
-                                        <button class="brn btn-danger buynow" onclick="addToCartHasNumber()" style="padding:7px; margin-left:20px">Mua ngay</button>
+                                        <button class="brn btn-danger buynow" onclick="addToCartHasNumber(${productDetailItem.increaseId})" style="padding:7px; margin-left:20px">Mua ngay</button>
                                     </div>
                                 </div>
                             </div>
@@ -68,31 +68,47 @@ function renderDetailPage() {
     
 }
 
-function addToCartHasNumber() {
-
+function addToCartHasNumber(idItem) {
     const productDetailItem = getItemSessionStorage("productItemDetail");
-
-
-    let productID = productDetailItem.increaseId;
-    let productName = productDetailItem.name;
-    let productPrice = productDetailItem.price;
-    let productImage = productDetailItem.image;
-    let productQuantity = parseInt($('.input-qty').val());
     
-    const product = {
-                productID,
-                productName,
-                productPrice,
-                productImage,
-                productQuantity
-    };
-    
-    products.push(product);
+    let productID, productName, productPrice, productImage, productQuantity;
+    $.ajax({
+        url: `http://localhost:8080/api/v1/product/checkStock?id=${idItem}`,
+        dataType: "json",
+        method: "GET",
+        success:function(res){
 
-  
-    setItemSessionStorage("productsItem", products);
-    
-    viewNumberCart();
+            
+            productID = productDetailItem.increaseId;
+            productName = productDetailItem.name;
+            productPrice = productDetailItem.price;
+            productImage = productDetailItem.image;
+            productQuantity = parseInt($('.input-qty').val());
+
+            const amountStock = res.data;
+            
+            if(amountStock - productQuantity < 0) {
+                 alert('Số lượng hàng không đủ');
+                //$('#addToCartModal').modal('show');
+            } else {
+                    const product = {
+                        productID,
+                        productName,
+                        productPrice,
+                        productImage,
+                        productQuantity
+                    };
+                    
+                    products.push(product);
+                
+                
+                    setItemSessionStorage("productsItem", products);
+                    
+                    viewNumberCart();
+                    }
+                    
+            }
+    });
 }
 function changeNumberProductQuantity() {
     $('input.input-qty').each(function() {

@@ -207,8 +207,8 @@ function viewNav1() {
         
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
-                console.log(dataArray);
-                $('#list-product').append('<div class="product-inner col-lg-3 my-3" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+               
+                $('#list-product').append('<div class="col-lg-3 my-3"><div class="product-inner p-2" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-danger btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div></div>')
             };      
             }
             })
@@ -229,7 +229,7 @@ function viewNav1() {
                 for (var i = 0; i < dataArray.length; i++){
                     
                     console.log(dataArray);
-                    $('#list-product').append('<div class="product-inner col-lg-3 my-3" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                    $('#list-product').append('<div class="col-lg-3 my-3"><div class="product-inner" onclick="moveToDetailPage()" data-idDetail="'+dataArray[i].increaseId+'"> <div class="product__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-danger btn-add-cart" onclick="addProductToCart()" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div></div>')
                 };          
             }
             })
@@ -250,7 +250,7 @@ function searchProduct() {
             for (var i = 0; i < dataArray.length; i++){
                 // $('#list-product').append('<div class="col-lg-6 col-md-4 col-lg-3"><strong>'+dataArray[i].name+'</strong></div>');
                 $('.search-product').css('display', 'block');
-                $('#list-product-search').append('<div class="product-inner-search my-3" onclick="moveToDetailPage()"> <div class="product-search__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-primary btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div>')
+                $('#list-product-search').append('<div class="col-lg-3 my-3"><div class="product-inner-search" onclick="moveToDetailPage()"> <div class="product-search__img"><img src="'+dataArray[i].image+'" class="product-img"><div class="product__promo product-promo"> </div> </div> <div class="product__text"><span class="d-block text-center product-name">'+dataArray[i].name+'</span><div class="product-price text-center"><span>'+dataArray[i].price+'</span></div><div class="text-center"><button type="button" class="btn btn-danger btn-add-cart" onclick="addProductToCart(event)" data-id="'+dataArray[i].increaseId+'" data-name="'+dataArray[i].name+'" data-price="'+dataArray[i].price+'" data-image="'+dataArray[i].image+'" >Thêm vào giỏ</button> </div></div></div></div>')
                 
             };      
             }
@@ -261,7 +261,11 @@ function searchProduct() {
 }
 
 
-// ADD TO CART NEW
+// Helper function
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 function getItemSessionStorage(key) {
@@ -282,49 +286,57 @@ function addProductToCart(e) {
     e = e || window.event;
 
    
-
     let productID = parseInt(e.target.dataset.id);
     let productName = e.target.dataset.name;
     let productPrice = e.target.dataset.price;
     let productImage = e.target.dataset.image;
+    let productQuantity = 1;
 
-    
-    //check quantity
-    checkItemInCart = products.filter(data => {
-        
-        return data.productID === productID ;
-    })
 
-    const product = {
-                productID,
-                productName,
-                productPrice,
-                productImage,
-                productQuantity: 1
-    };
-    // check item co roi thi quantity += 1
-    //ham onload dau ? viet di xong t onload
-    //the m viet sang 1 file khac roi nhung no vao n
-    // tu tu dat ho cai de bug
-    // moi lan xoa session reffresh lai trang di dang bi code thg kia de len
-    //ok ?, ke dau buoi, do m chay dc day
-    // ao vlon :)). chan ban lam master javascriup the nay thi ong :v 
-    if(checkItemInCart.length > 0){
-        
-        products.forEach(p => {
-            if(p.productID === productID) {
-                p.productQuantity += 1;
+    $.ajax({
+        url: `http://localhost:8080/api/v1/product/checkStock?id=${productID}`,
+        dataType: "json",
+        method: "GET",
+        success:function(res){
+
+            const amountStock = res.data;
+            
+            if(amountStock - productQuantity < 0) {
+                 alert('Số lượng hàng không đủ');
+                
+            } else {
+                     //check quantity
+                    checkItemInCart = products.filter(data => {
+                        
+                        return data.productID === productID ;
+                    })
+
+                    const product = {
+                                productID,
+                                productName,
+                                productPrice,
+                                productImage,
+                                productQuantity
+                    };
+                
+                    if(checkItemInCart.length > 0){
+                        
+                        products.forEach(p => {
+                            if(p.productID === productID) {
+                                p.productQuantity += 1;
+                            }
+                        })
+                    }
+                    else
+                        products.push(product);
+
+                    setItemSessionStorage("productsItem", products);
+
+                    viewNumberCart();
+                }
+                    
             }
-        })
-    }
-    else
-        products.push(product);
-
-  
-    setItemSessionStorage("productsItem", products);
-    
-    viewNumberCart();
-
+    });
     
 }
 
@@ -393,9 +405,6 @@ function renderListProductCart() {
         //render list
         viewListProductCart = newCart.map((item, index) => {
             return ` <tr class="cart_item" id="cart-product-new">
-                                <td class="cart-premove">
-                                    <button class="btnDeleteItem" title="Xóa sản phẩm này" data-idItem=${index}">x</button>
-                                </td>
                                 <td class="cart-img">
                                     <a href="#" class="href-product-cart">
                                         <img src="${item.productImage}" alt="" class="img-product-cart">
@@ -405,13 +414,21 @@ function renderListProductCart() {
                                     <a href="#" class="href-product-cart name-product-cart">${item.productName}</a>
                                 </td>
                                 <td class="cart-price  d-none d-md-block" data-title="Giá">
-                                    <span class="cost-product-cart">${item.productPrice}</span>
+                                    <span class="cost-product-cart">${numberWithCommas(item.productPrice)}</span>
                                 </td>
                                 <td class="cart-quantity" data-title="Số lượng">
-                                    <span class="cost-product-cart">${item.productQuantity}</span>
+                                    <div class="quantity buttons_added">
+                                    
+                                        <input type="number" id="number" value="${item.productQuantity}" min="1" max="100" step="1" class="input-product-cart" data-id=${index} onchange="inputChangeProductCart()"/>
+
+                                    </div>
+                                    
                                 </td>
                                 <td class="cart-subtotal" data-title="Tổng">
-                                    <span class="total-product-cart">${item.productPrice * item.productQuantity}</span>
+                                    <span class="total-product-cart">${numberWithCommas(item.productPrice * item.productQuantity)}</span>
+                                </td>
+                                <td class="cart-premove" data-title="Xóa">
+                                    <button class="btnDeleteItem" title="Xóa sản phẩm này" data-idItem=${index}">x</button>
                                 </td>
                      </tr>
             `;
@@ -424,13 +441,13 @@ function renderListProductCart() {
             <tr class="cart-psubtotal">
                 <th>Tạm tính</th>
                 <td data-title="Tạm tính" id="tam-tinh">
-                    <span id="temp-sum-total">${cal(newCart).amountTemp}</span>
+                    <span id="temp-sum-total">${numberWithCommas(cal(newCart).amountTemp)}</span>
                 </td>
             </tr>
             <tr class="order-total">
                 <th>Tổng</th>
                 <td data-title="Tổng" id="tong-tien">
-                    <span id="sum-total">${cal(newCart).amount}</span>
+                    <span id="sum-total">${numberWithCommas(cal(newCart).amount)}</span>
                 </td>
             </tr>
         `;
@@ -442,16 +459,16 @@ function renderListProductCart() {
     listCalTotal.html(viewListCalTotal)
 }
 
-// function inputChangeProductCart(id, quantity) {
-//     let inputQuantity = $(`#product-cart-${id} input[type='text']`);
-//     let val = inputQuantity.val();
-//     if(val > 0 && val <= quantity) {
-//         changeNumberProductCart(id, val);
-//     }else if(val == 0) {
-        
-//     }
-//   //  viewNumberCart();
-// }
+function inputChangeProductCart(e) {
+    e = e || window.event;
+    let qty = parseInt(e.target.value);
+    let index = parseInt(e.target.dataset.id);
+    products[index].productQuantity = qty;
+    setItemSessionStorage("productsItem", products)
+    window.location.reload();
+    //console.log(newCart[index].productQuantity);
+}
+
 
 
 function keypressEnterInputSearchProduct() {
@@ -625,6 +642,24 @@ function validateNewUser() {
         return false;
     }
 
+    if(address == '') {
+        fieldAddress.val('Địa chỉ không được để trống');
+        fieldAddress.css({'border-color': 'red', 'color': 'red'});
+        fieldAddress.focus(function() {
+            fieldAddress.val('');
+        })
+        return false;
+    }
+
+    if(phonenumber == '') {
+        fieldPhone.val('Số điện thoại không được để trống');
+        fieldPhone.css({'border-color': 'red', 'color': 'red'});
+        fieldPhone.focus(function() {
+            fieldPhone.val('');
+        })
+        return false;
+    }
+
     return true;
 }   
 
@@ -642,7 +677,7 @@ function registerUser() {
         const validValidate = validateNewUser();
 
         if(!validValidate) {
-            alert('Sai');
+        
             return;
         }
         
@@ -683,7 +718,14 @@ function registerUser() {
 
 function buttonHandleEvent() {
     myButtonThanhtoan.on('click', function() {
-        autoRedirect('dathang.html');
+        
+        if(products == undefined || !products.length) {
+            $('#cartModal').modal('show');
+            return;
+        } else {
+            autoRedirect('dathang.html');
+        }
+
     });
 }
 

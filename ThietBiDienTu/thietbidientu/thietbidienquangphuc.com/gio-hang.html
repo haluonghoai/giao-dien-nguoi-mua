@@ -29,12 +29,13 @@
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick.css">
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick-theme.css">
         <!-- ============= Global Css ============= -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/global.css">
         <!-- ============= Jquery ============= -->
-        <script src="../code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous"></script>
         <script src="../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      
+        <!-- ============= Jquery ============= -->
         <!-- ============= Font Awesome ============= -->
         <script src="../kit.fontawesome.com/63f35fe35b.js" crossorigin="anonymous"></script>
         <!-- ============= Bootstrap 4 Js ============= -->
@@ -161,10 +162,12 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th class="product-name" colspan="3">Sản phẩm</th>
-                            <th class="product-price d-none d-md-block">Giá</th>
+                            <th class="product-name">ẢnhSản phẩm</th>
+                            <th class="product-name">Tên sản phẩm</th>
+                            <th class="product-price">Giá</th>
                             <th class="product-quantity">Số lượng</th>
                             <th class="product-subtotal">Tổng</th>
+                            <th class="product-subtotal">Xóa</th>
                         </tr>
                         </thead>
                         <tbody id="list-product-cart">
@@ -237,6 +240,27 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Giỏ hàng đang trống, mời bạn mua hàng !
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    
 </section>
 
     </main>

@@ -3,19 +3,20 @@
 <!DOCTYPE html>
 <html lang="en">
     
-<!-- Mirrored from thietbidienavhh.com/cong-trinh by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Dec 2020 08:05:13 GMT -->
+<!-- Mirrored from thietbidienavhh.com/gio-hang by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Dec 2020 08:05:16 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- ============= Title  ============= -->
-        <title id="title-page">Chi tiết sản phẩm</title>
+        <title id="title-page">Đặt hàng thành công</title>
         <!-- ============= Meta Sale  ============= -->
         <meta name="description" content="Thiết bị điện Quang Phúc - An toàn cho mọi nhà" class="main-description-page">
-        <meta property="og:url" itemprop="url" content="http://thietbidienquangphuc.com/thietbidienquangphuc_com/cong-trinh" id="facebook-url-page"/>
+        <meta property="og:url" itemprop="url" content="http://thietbidienquangphuc.com/thietbidienquangphuc_com/gio-hang" id="facebook-url-page"/>
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Chi tiết sản phẩm" class="main-title-page"/>
+        <meta property="og:title" content="Giỏ hàng" class="main-title-page"/>
         <meta property="og:description" content="Thiết bị điện Quang Phúc - An toàn cho mọi nhà" class="main-description-page"/>
+        <meta property="og:image" content="https://cdn.bksoftwarevn.com/resources/micro-upload/avhh/logo/logo-avhh.png" class="main-image-page"/>
         <!-- ============= End Meta Sale  ============= -->
         <!-- ============= Google Font============= -->
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
@@ -23,24 +24,26 @@
         <!-- ============= Bootstrap Css ============= -->
 
 
-        <!-- <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
         <!-- ============= Library Css============= -->
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick.css">
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick-theme.css">
         <!-- ============= Global Css ============= -->
-        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/global.css">
-        <link rel="stylesheet" href="css/detail_page.css">
         <!-- ============= Jquery ============= -->
+        <script src="../code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
         <script src="../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <!-- ============= Jquery ============= -->
-    
         <!-- ============= Font Awesome ============= -->
         <script src="../kit.fontawesome.com/63f35fe35b.js" crossorigin="anonymous"></script>
         <!-- ============= Bootstrap 4 Js ============= -->
-
+        <script src="../cdn.jsdelivr.net/npm/popper.js%401.16.1/dist/umd/popper.min.js"
+                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+                crossorigin="anonymous"></script>
+        <script src="../stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+                crossorigin="anonymous"></script>
         <link rel="stylesheet" href="plugins/bootstrap-notify/bootstrap-notify.min.css"/>
         <script src="plugins/bootstrap-notify.min.js"></script>
         <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
@@ -49,7 +52,12 @@
         <script src="plugins/particles/particles.js"></script>
         <script src="plugins/pagination/pagination.js"></script>
         <link rel="stylesheet" href="plugins/animate/animate.min.css" type="text/css"/>
-     
+        <!-- ============= Global Js ============= -->
+        <script src="js/app_const.js"></script>
+        <script src="js/global.js"></script>
+        <script src="ajax/ajax_main.js"></script>
+        <script src="js/dat_hang_thanh_cong.js"></script>
+        <script src="ajax/page/ajax_page_base.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_global.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_infor_system_service.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_product_service.js"></script>
@@ -57,53 +65,6 @@
         <!-- ============= Import Custom Sale Head ============= -->
         <meta property="fb:app_id" content="1239278239786334"/>
         <meta property="fb:admins" content="100013406503167"/>
-        <style>
-            .buttons_added {
-            opacity:1;
-            display:inline-block;
-            display:-ms-inline-flexbox;
-            display:inline-flex;
-            white-space:nowrap;
-            vertical-align:top;
-        }
-        .is-form {
-            overflow:hidden;
-            position:relative;
-            background-color:#f9f9f9;
-            height:2.2rem;
-            width:1.9rem;
-            padding:0;
-            text-shadow:1px 1px 1px #fff;
-            border:1px solid #ddd;
-        }
-        .is-form:focus,.input-text:focus {
-            outline:none;
-        }
-        .is-form.minus {
-            border-radius:4px 0 0 4px;
-        }
-        .is-form.plus {
-            border-radius:0 4px 4px 0;
-        }
-        .input-qty {
-            background-color:#fff;
-            height:2.2rem;
-            text-align:center;
-            font-size:1rem;
-            display:inline-block;
-            vertical-align:top;
-            margin:0;
-            border-top:1px solid #ddd;
-            border-bottom:1px solid #ddd;
-            border-left:0;
-            border-right:0;
-            padding:0;
-        }
-        .input-qty::-webkit-outer-spin-button,.input-qty::-webkit-inner-spin-button {
-            -webkit-appearance:none;
-            margin:0;
-        }
-        </style>
     </head>
     <body>
     
@@ -188,109 +149,122 @@
 </nav>
     <main class="home">
         
-
-
-
-<script src="js/utils.js"></script>
-<link rel="stylesheet" href="css/common_category.css">
-<script src="ajax/pages/page_common_category.js"></script>
-
-<section class="product-detail">
+<link rel="stylesheet" href="css/gio_hang.css">
+<script src="plugins/inputSpinnerBootstrap/bootstrap-input-spinner.js"></script>
+<script src="js/gio_hang.js"></script>
+<script src="ajax/page/ajax_page_gio_hang.js"></script>
+<script src="ajax/page/ajax_page_base.js"></script>
+<section class="cart">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-5">
-                <a class="product-detail__img href-img-product" data-lightbox="image-1" href="https://thietbidienhanoi.vn/media/product/250_2789_0_day_don_mem_vcm_cadivi_cu_p.jpg">
-                    <img src="https://thietbidienhanoi.vn/media/product/250_2789_0_day_don_mem_vcm_cadivi_cu_p.jpg" class="img-product" alt="Dây điện Cadivi, dây đôi mềm dẹt VCmo 2x0.75">
-                    <div class="p-promo" id="pro-infor-product">   
-                    </div>
-                </a>
+            <div class="col-12 col-md-6 cart-bor">
+                
+                <div class="jumbotron text-center">
+                    <i class="far fa-check-circle fa-6x my-2"></i>
+                    <h1 class="display-3">Cảm ơn bạn đã đặt hàng!</h1>
+                    <p class="lead">Đơn hàng của bạn đã được đặt thành công, chúng tôi sẽ liên lạc khi hoàn tất đơn hàng</p>
+                    <hr>
+                    <p>
+                        Có vấn đề về đơn hàng? <a href="#">Liên hệ chúng tôi</a>
+                    </p>
+                    
+                    <a href="trang-chu.html" class="btn btn-info btn-lg my-3">
+                        <i class="fas fa-long-arrow-alt-left"></i>
+                        &nbsp;Tiếp tục mua
+                        hàng
+                    </a>
+                    
+                  </div>
             </div>
-            <div class="col-12 col-md-7">
-                <div class="product-detail_decs">
-                    <h1 class="pdc-name" id="name-infor-product">Dây điện Cadivi, dây đôi mềm dẹt VCmo 2x0.75</h1>
-                    <p class="pdc-price" id="cost-infor-product">
-                        
-                        <span>395.000 VNĐ</span>
-                    </p>
-                    <p class="pdc-status">
-                        <span>Tình trạng:</span>
-                        <span id="status-infor-product">Còn hàng</span>
-                    </p>
-                    <p class="pdc-contact">
-                        <span>Liên hệ được giá tốt:</span>
-                        <a href="tel:0967919266" class="link-phone-comany text-phone-company">0967919266</a>
-                    </p>
-                    <p class="description">Mô tả:</p>
-                    <div class="mo-ta">
-                        Dòng sản phẩm công tắc Minerva hoàn toàn mới với thiết kế mặt tiếp xúc lớn, không viền giúp tối đa hóa không gian vận hành nhờ loại bỏ sự gò bó của khung viền so với các dòng công tắc khác, tạo cảm giác vận hành hoàn hảo. Bề mặt của công tắc sử dụng chất liệu cải tiến cho độ bóng mịn mượt mà, bo cong hài hòa với không gian. Đặc biệt góc đảo chiều bật tắt nhỏ giúp sản phẩm trông thanh mảnh, mỏng
-                    </div>
-                    <p class="pdc-parameter">Thông số kĩ thuật:</p>
-                    <div class="thong-so-kt-thuat">
-                        Dòng sản phẩm: Minevar, mầu sắc: mầu xám kim, dòng điện định mức: 16A, điện áp định: 250VAC, tiêu chuẩn: JIS Nhật Bản
-                    </div>
-                    <br>
-                    <div class="pdc-inbut">
-                        <div class="buttons_added">
-                            <input class="minus is-form" type="button" value="-" style="padding: 0px 20px 40px 20px;
-                            font-size: 30px;">
-                            <input aria-label="quantity" class="input-qty" max="10" min="1" name="" type="number" value="4" style="padding: 20px 2px 20px 2px;
-                            font-size: 18px;">
-                            <input class="plus is-form" type="button" value="+" style="padding: 5px 25px 35px 15px;
-                            font-size: 20px;">
-                          </div>
-                        <button class="brn btn-danger buynow" onclick="addToCartHasNumber(183, 5)" style="padding:7px; margin-left:20px">Mua ngay</button>
+            <div class="col-12 col-md-6">
+                <!-- Load info don hang vua mua -->
+                <div class="checkout-order">
+                    <div class="checkout-sidebar">
+                        <div class="info-order-view">Thông tin đơn hàng</div>
+                        <div class="time-order-box">Thời gian đặt: </div>
+                        <div id="order_review" class="order-success">
+                            <table class="table table-striped">
+                                <thead class="thead-dark" >
+                                    <tr>
+                                        <th scope="col">STT</th>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="list-product-total">
+                                    <tr class="">
+                                        <td>1</td>
+                                        <td class="name-number-product">Dây điện Cadivi, dây đơn mềm VCm 1x1.5 x 1 <strong><span class="">số lượng: 2</span></strong></td>
+                                        <td class="cart-totalprice">
+                                            <span class="product-total-price">395.000 VNĐ</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="">
+                                        <td>2</td>
+                                        <td class="name-number-product">Dây điện Trần Phú, dây đơn mềm VCm 1x6.0 x 1 <strong><span class="">số lượng : 3</span></strong></td>
+                                        <td class="cart-totalprice">
+                                            <span class="product-total-price">4.000.000 VNĐ</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="order-total">
+                                        <th colspan="2">Tổng</th>
+                                        <td>
+                                            <span class="sum-cost" id="sum-cost">4.395.000 VNĐ</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                               
+                            </table>
+                            <div class="customer-note">
+                                <label>Ghi chú</label>
+                                <div class="alert alert-primary" id="note-by-customer" role="alert">
+                                    Giao hàng cẩn thận
+                                </div>
+                                <label>Hình thức thanh toán</label>
+                                <div class="alert alert-dark" id="payment-method" role="alert">
+                                    Thanh toán chuyển khoản
+                                </div>
+                            </div>
+                            <div class="customer-info">
+                                <h3 class="cd-title">Thông tin khách hàng</h3>
+                                <div class="customer-field">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Họ Tên</label>
+                                                <span id="name"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Email</label>
+                                                <span id="email"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Địa chỉ</label>
+                                                <span id="diachi"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Số điện thoại </label>
+                                                <span id="sodienthoai"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-      <!-- Modal -->
-  <div class="modal fade" id="addToCartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Đã thêm sản phẩm vào giỏ hàng
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="modal fade" id="addToCartErrorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-           Số lượng hàng không đủ
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 </section>
-
-
-
 
     </main>
     
@@ -436,6 +410,17 @@
             </div>
         </section>
     </footer>
+
+<div id="social-right-fixed" class="">
+    <a href="#" class="facebook link-facebook-company" target="_blank"><img src="file/icon/facebook.png"></a>
+    <a href="#" class="youtube link-youtube-company" target="_blank"><img src="file/icon/youtube-play.png"></a>
+    <a href="#" class="email-r link-email-company" target="_blank"><img src="file/icon/important-mail.png"></a>
+    <a href="#" class="hot-line-r link-zalo-company"  target="_blank"><img src="file/icon/zalo.png"></a>
+</div>
+<a class="btn-call-now link-phone-company" href="tel:0334299199">
+    <i class="fas fa-phone-volume"></i>
+    <span style="margin-left: 5px; padding: 0 5px" class="d-none d-md-block">Hotline: <span class="text-phone-company">0334299199</span></span>
+</a>
 <div class="gioHang">
     <a href="gio-hang.html" class="cart-icon animate__animated" title="Giỏ hàng của bạn">
         <i class="fas fa-shopping-basket"></i>
@@ -446,14 +431,8 @@
     <div class="circle" style="animation-delay: 2s"></div>
     <div class="circle" style="animation-delay: 3s"></div>
 </div>
-    <!-- ============= Global Js ============= -->
 
-    <script src="js/app_const.js"></script>
-    <script src="js/global.js"></script>
-    <script src="ajax/ajax_main.js"></script>
-    <script src="ajax/page/ajax_page_base.js"></script>
-    <script src="js/detail_page.js"></script>
-    
+
     </body>
 
 

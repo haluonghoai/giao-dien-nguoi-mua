@@ -2,7 +2,16 @@ let listProductTotal;
 let customerDetail;
 let buttonOrder;
 // let paymentByBank, paymentByCash;
-let paymentMethodsRadio;
+let paymentMethodsRadio, noteByCustomer;
+
+const orderSuccess = {};
+
+
+window.onload = function() {
+    if(location.pathname === 'dathang.html') {
+        userMustLogin('dathang.html');
+    }
+}
 
 $(function () {
 
@@ -12,13 +21,28 @@ $(function () {
     btnOrder = $('#btn-order');
 
     paymentMethodsRadio = $("input:radio[name='payment_method']");
+    noteByCustomer = $("textarea[name='note']");
     // paymentByBank = $('#payment_method_bacs');
     // paymentByCash = $('#payment_method_cod');
 
+   
     orderProduct();
+    fireEventHandler();
     renderListProductPayment();
     renderListCustomer();
 })
+
+
+function userMustLogin(url = null) {
+    let validLogin = isLoggedIn();
+    
+    if(!validLogin) {
+        window.location = 'login.html';
+    }
+    if(validLogin) {
+        window.location = url;
+    }
+}
 
 
 function renderListProductPayment() {
@@ -30,13 +54,15 @@ function renderListProductPayment() {
         //render list
         
         // console.log(cartPayment.length);
-        viewListProductTotal = cartPayment.map(item => {
+        viewListProductTotal = cartPayment.map((item, index) => {
             
             return ` 
                 <tr class="">
+                    <td>${index + 1}</td>
                     <td class="name-number-product">${item.productName}</td>
+                    <td>${item.productQuantity}</td>
                     <td class="cart-totalprice">
-                        <span class="product-total-price">${item.productPrice * item.productQuantity}</span>
+                        <span class="product-total-price">${numberWithCommas(item.productPrice * item.productQuantity)}</span>
                     </td>
                 </tr>
                 `;
@@ -44,9 +70,9 @@ function renderListProductPayment() {
 
         viewListTotal = `
                 <tr class="order-total">
-                    <th>Tổng</th>
+                    <th colspan="3">Tổng</th>
                     <td>
-                        <span class="sum-cost" id="sum-cost">${cal(cartPayment).amount}</span>
+                        <span class="sum-cost" id="sum-cost">${numberWithCommas(cal(cartPayment).amount)}</span>
                     </td>
                 </tr>
         `;
@@ -65,32 +91,14 @@ function renderListCustomer() {
     console.log(userDetails);
     let viewListCustomer = '';
     viewListCustomer = `
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="filed-item">
-                                    <label>Họ Tên</label>
-                                    <strong><span id="name">${userDetails.name}</span></strong>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="filed-item">
-                                    <label>Email</label>
-                                    <strong><span id="email">${userDetails.email}</span></strong>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="filed-item">
-                                    <label>Địa chỉ</label>
-                                    <strong><span id="diachi">${userDetails.adress}</span></strong>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="filed-item">
-                                    <label>Số điện thoại </label>
-                                    <strong><span id="sodienthoai">${userDetails.phoneNumber}</span></strong>
-                                </div>
-                            </div>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item active">Họ tên: ${userDetails.name}</li>
+                            <li class="list-group-item">Email: ${userDetails.email}</li>
+                            <li class="list-group-item">Địa chỉ: ${userDetails.adress}</li>
+                            <li class="list-group-item">Số điện thoại: ${userDetails.phoneNumber}</li>
+                            
+                        </ul>
+                        
                  `;
     customerDetail.html(viewListCustomer);
     return customerDetail;
@@ -100,11 +108,14 @@ function renderListCustomer() {
 
 function orderProduct() {
     btnOrder.on('click', function() {
-        let paymentMethod;
-        let userDetails = JSON.parse(getItemSessionStorage('tokenLoginSuccess'));
-        let productDetials = getItemSessionStorage('productsItem');
+
         
-        let productOrderArray = productDetials.map(item => {
+        let paymentMethod, paymentText;
+        let userDetails = JSON.parse(getItemSessionStorage('tokenLoginSuccess'));
+
+        let productDetails = getItemSessionStorage('productsItem');
+        
+        let productOrderArray = productDetails.map(item => {
             return {
                 "idProduct" : item.productID,
                 "amount": item.productQuantity
@@ -116,44 +127,67 @@ function orderProduct() {
             if($(this).is(':checked')) {
 
                paymentMethod = $(this).val();
+               var idVal = $(this).attr("id");
+               paymentText = $("label[for='"+idVal+"']").text();
+               
             }
 
         });
         // testing: console.log(productOrderArray);
 
-        // create new Order
-        const orderNew = {
-            "order" : {
-                "timecreate" : "",
-                "note" : "Giao hàng cẩn thận",
-                "idUser" :1,
-                "idCustomer": userDetails.id,
-                "idOrderstatus" :1,
-                "statusPaments" : false,
-                "payments" : paymentMethod ? true : false
-            },
-            "orderDetailsList": productOrderArray
-            
-        }
-        //console.log(productDetials);
+        var orderNew = new Object();
+        orderNew.note =  noteByCustomer.val();
+        orderNew.idUser = 1; // kiểm tra xem bảng nguoidung co id này ko
+        orderNew.idCustomer =  userDetails.id;
+        orderNew.idOrderstatus = 1, // bên admin set
+        orderNew.statusPaments = false; // false: mặc định là chưa thanh toán
+        orderNew.payments = parseInt(paymentMethod) ? true : false;
+        var orderDTO = new Object();
+        orderDTO.order = orderNew;
+        orderDTO.orderDetailsList = productOrderArray;
+
+
+        // Order success push to Session
+       
+        
+        //console.log(productDetails);
+
         $.ajax({
             url: `http://localhost:8080/api/v1/order/addPurchase`,
             type: 'POST',
-            data: orderNew,
             contentType: "application/json;charset=utf-8",
             data:
-                JSON.stringify(orderNew)
+            JSON.stringify(orderDTO)
             ,
             success: function (res) {
-                alert('Bạn đã đặt hàng thành công');
-                //alert(res['data'])
+
                 console.log(res);
-                //window.location.reload();
-            },
-            error: function(errorThrown) {
-                alert('Đặt hàng thất bại');
-                console.log(errorThrown);
+                let validData = JSON.parse(res);
+                let {idOrderstatus, note} = validData.data.order;
+                let idOrder = validData.data.orderDetails[0].idOrder;
+                //console.log(idOrder);
+                
+                // push value to orderSuccess;
+                orderSuccess.note = note;
+                orderSuccess.payments = paymentText;
+                orderSuccess.orderStatus = idOrderstatus ? 'Chưa xác nhận' : 'Đã xác nhận';
+                orderSuccess.idOrder = idOrder;
+
+                if(validData.data.check === false) {
+                    $('#orderFailModal').modal('show');
+                } else {          
+                        $('#orderSuccessModal').modal('show');
+                }             
             }
+           
         });
+    });
+}
+function fireEventHandler() {
+    $("#closeNotifyOrder").on("click", function () {
+        setItemSessionStorage('productOrderSuccess', [...products]);
+        setItemSessionStorage('noteOrderSuccess', orderSuccess);
+        sessionStorage.removeItem('productsItem');
+        window.location = 'dat-hang-thanh-cong.html';
     });
 }

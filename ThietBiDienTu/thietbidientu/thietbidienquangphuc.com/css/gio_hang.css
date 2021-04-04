@@ -7,8 +7,27 @@ table  thead tr th{
     border-bottom: 1px solid #dee2e6;
 }
 
+/* ORDER SUCCESS*/
+.customer-info {
+    margin-top: 30px;
+}
+
+
+.checkout-order h3 {
+    font-size: 24px;
+    margin: 5px 0;
+}
+.info-order span {
+    color: #e74c3c;
+}
+
+.order-success .table td{
+    text-align: center;
+}
+
 .table td, .table th {
-    padding: 3px;
+    padding: 10px 8px;
+    font-size: 14px;
     vertical-align: middle !important;
     border: none;
 }
@@ -46,6 +65,8 @@ table  thead tr th{
 .cart-name  a,.cart-price span,.cart-subtotal span{
     color: var(--main-color);
     font-size: 1.2rem;
+    text-align: left;
+    display: block;
     font-weight: 600;
 }
 
