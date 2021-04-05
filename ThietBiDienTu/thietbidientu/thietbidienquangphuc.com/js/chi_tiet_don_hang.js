@@ -66,6 +66,10 @@ function renderListOrderDetail() {
 
     let date = `${(timeFormat.getDate() < 10) ? '0'+ timeFormat.getDate() : timeFormat.getDate()}-${(timeFormat.getMonth() < 10) ? '0'+ (timeFormat.getMonth()+1) : (timeFormat.getMonth()+1)}-${timeFormat.getFullYear()}`;
 
+    let dayExpected = new Date(timeFormat.setDate(timeFormat.getDate() + 7));
+    let dayExpectedFormat = `${(dayExpected.getDate() < 10) ? '0'+ dayExpected.getDate() : dayExpected.getDate()}-${(dayExpected.getMonth() < 10) ? '0'+ (dayExpected.getMonth()+1) : (dayExpected.getMonth()+1)}-${dayExpected.getFullYear()}`;
+    
+    console.log(dayExpected);
     setActiveTrack(informationOrder.orderStatus);
     
 
@@ -78,7 +82,7 @@ function renderListOrderDetail() {
                     </div>
                     <article class="card">
                         <div class="card-body row">
-                            <div class="col"> <strong>Dự kiến thời gian giao:</strong> <br>29 nov 2019 </div>
+                            <div class="col"> <strong>Dự kiến thời gian giao:</strong> <br>${dayExpectedFormat}</div>
                             <div class="col"> <strong>Hình thức thanh toán:</strong> <br> ${informationOrder.payments}</div>
                             <div class="col"> <strong>Note:</strong> <br> ${informationOrder.note} </div>
                             <div class="col"> <strong>Trạng thái: </strong> <br> ${statusOrder[informationOrder.orderStatus].statusName}</div>
