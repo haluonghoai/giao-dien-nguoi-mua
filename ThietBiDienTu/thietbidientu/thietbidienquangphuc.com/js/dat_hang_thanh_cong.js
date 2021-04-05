@@ -69,10 +69,7 @@ function renderNoteAndPayment() {
                     <div class="alert alert-dark" id="payment-method" role="alert">
                         ${informationOrder.payments}
                     </div>
-                    <label>Trạng thái đơn hàng</label>
-                    <div class="alert alert-warning" id="payment-method" role="alert">
-                        ${informationOrder.orderStatus}
-                    </div>
+                 
                  `;
     listCustomerNote.html(viewListCustomerNote);
     return listCustomerNote;

@@ -508,10 +508,17 @@ function hasUserLogin() {
     }
     //console.log(userLoginName);
     const userLoginText = `
-        Hello ${userLoginName}
-         <button class="brn btn-info btn-lg btnLogout" onclick="logoutUser()">
-            <i class="fas fa-sign-out-alt"></i>
-        </button>
+        <div class="dropdown show">
+            <a class="btn btn-info btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ${userLoginName}
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="chi-tiet-don-hang.html"><i class="fas fa-cube"></i>Đơn hàng của tôi</a>
+                <a class="dropdown-item" href="#" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i>Đăng xuất</a>
+            </div>
+        </div>
+        
     `
    
     if(validLogin) {

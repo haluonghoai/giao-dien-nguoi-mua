@@ -163,15 +163,16 @@ function orderProduct() {
 
                 console.log(res);
                 let validData = JSON.parse(res);
-                let {idOrderstatus, note} = validData.data.order;
+                let {idOrderstatus, note, timecreate} = validData.data.order;
                 let idOrder = validData.data.orderDetails[0].idOrder;
-                //console.log(idOrder);
+              //  console.log(validData);
                 
-                // push value to orderSuccess;
+              //  push value to orderSuccess;
                 orderSuccess.note = note;
                 orderSuccess.payments = paymentText;
-                orderSuccess.orderStatus = idOrderstatus ? 'Chưa xác nhận' : 'Đã xác nhận';
+                orderSuccess.orderStatus = idOrderstatus;
                 orderSuccess.idOrder = idOrder;
+                orderSuccess.timeCreate = timecreate;
 
                 if(validData.data.check === false) {
                     $('#orderFailModal').modal('show');

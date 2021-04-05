@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- ============= Title  ============= -->
-        <title id="title-page">Giỏ hàng</title>
+        <title id="title-page">Chi tiết đơn hàng</title>
         <!-- ============= Meta Sale  ============= -->
         <meta name="description" content="Thiết bị điện Quang Phúc - An toàn cho mọi nhà" class="main-description-page">
         <meta property="og:url" itemprop="url" content="http://thietbidienquangphuc.com/thietbidienquangphuc_com/gio-hang" id="facebook-url-page"/>
@@ -24,29 +24,23 @@
         <!-- ============= Bootstrap Css ============= -->
 
 
-        <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <!-- ============= Library Css============= -->
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick.css">
         <link rel="stylesheet" href="plugins/slick-1.8.1/slick-theme.css">
         <!-- ============= Global Css ============= -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/global.css">
-        <!-- ============= Jquery ============= -->
+        <link rel="stylesheet" href="css/chi_tiet_don_hang.css">
+        <!-- ============= Bootstrap 4 Js ============= -->
         <script src="../ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         
-      
-        <!-- ============= Jquery ============= -->
         <!-- ============= Font Awesome ============= -->
         <script src="../kit.fontawesome.com/63f35fe35b.js" crossorigin="anonymous"></script>
         <!-- ============= Bootstrap 4 Js ============= -->
-        <script src="../cdn.jsdelivr.net/npm/popper.js%401.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous"></script>
-        <script src="../stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-                crossorigin="anonymous"></script>
+     
         <link rel="stylesheet" href="plugins/bootstrap-notify/bootstrap-notify.min.css"/>
         <script src="plugins/bootstrap-notify.min.js"></script>
         <script src="plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
@@ -59,6 +53,7 @@
         <script src="js/app_const.js"></script>
         <script src="js/global.js"></script>
         <script src="ajax/ajax_main.js"></script>
+        <script src="js/chi_tiet_don_hang.js"></script>
         <script src="ajax/page/ajax_page_base.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_global.js"></script>
         <script src="../cdn.bksoftwarevn.com/resources/library_js/ajax_micro_service/ajax_infor_system_service.js"></script>
@@ -159,110 +154,124 @@
 <section class="cart">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-8 cart-bor">
-                <div class="cart__items">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th class="product-name">ẢnhSản phẩm</th>
-                            <th class="product-name">Tên sản phẩm</th>
-                            <th class="product-price">Giá</th>
-                            <th class="product-quantity">Số lượng</th>
-                            <th class="product-subtotal">Tổng</th>
-                            <th class="product-subtotal">Xóa</th>
-                        </tr>
-                        </thead>
-                        <tbody id="list-product-cart">
-                            <tr class="cart_item d-none" id="cart-product-temp">
-                                <td class="cart-premove">
-                                    <span class="remove" title="Xóa sản phẩm này" onclick="removeProductCart()">×</span>
-                                </td>
-                                <td class="cart-img">
-                                    <a href="#" class="href-product-cart">
-                                        <img src="#" alt="" class="img-product-cart">
-                                    </a>
-                                </td>
-                                <td class="cart-name">
-                                    <a href="#" class="href-product-cart name-product-cart"></a>
-                                </td>
-                                <td class="cart-price  d-none d-md-block" data-title="Giá">
-                                    <span class="cost-product-cart"></span>
-                                </td>
-                                <td class="cart-quantity" data-title="Số lượng">
-                                    <div class="quantity buttons_added">
-                                        <input type="number" value="1" min="0" max="100" step="1" class="input-product-cart" onchange="inputChangeProductCart()"/>
+            <div class="col-12 col-md-9 cart-bor">
+                
+                <div class="detail-order">
+                     <article class="card">
+                        <header class="card-header">Theo dõi đơn hàng</header>
+                        <div class="card-body">
+                            <div class="tracking-order">
+                                <h6>Order ID: OD45345345435</h6>
+                                <article class="card">
+                                    <div class="card-body row">
+                                        <div class="col"><strong>Estimated Delivery time:</strong> <br>29 nov 2019 </div>
+                                        <div class="col"><strong>Shipping BY:</strong> <br> BLUEDART, | <i class="fa fa-phone"></i> +1598675986 </div>
+                                        <div class="col"><strong>Status:</strong> <br> Picked by the courier </div>
+                                        <div class="col"><strong>Tracking #:</strong> <br> BD045903594059 </div>
                                     </div>
-                                </td>
-                                <td class="cart-subtotal" data-title="Tổng">
-                                    <span class="total-product-cart"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </article>
+                            </div>
+                            <div class="track">
+                                <div class="step"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Đã xác nhận</span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-cubes"></i> </span> <span class="text">Đang giao hàng</span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text">Đã giao hàng </span> </div>
+                                <div class="step"> <span class="icon"> <i class="fa fa-box"></i> </span> <span class="text">Nhận hàng</span> </div>
+                                
+                            </div>
+                           
+                            
+                            <hr>
+                            <ul class="row product-order">
+                                <li class="col-md-4">
+                                    <figure class="itemside mb-3">
+                                        <div class="aside"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1571751108/Ecommerce/laptop-dell-xps-15-computer-monitors-laptops.jpg" class="img-sm border"></div>
+                                        <figcaption class="info align-self-center">
+                                            <p class="title">Dell Laptop with 500GB HDD <br> 8GB RAM</p> <span class="text-muted">$950 </span>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                                
+                            </ul>
+                            <h2 class="product-order-total"></h2>
+                            <hr>
+                            <div class="button-payment">
+                                
+                                <button type="submit" class="btn btn-warning btn-lg btn-payment">
+                                    Thanh toán
+                                    <i class="fas fa-long-arrow-alt-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
                 </div>
-                <div class="cart__control">
-                    <a href="trang-chu.html" class="btn btn-info btn-lg"><i class="fas fa-long-arrow-alt-left"></i>&nbsp;Tiếp tục mua
-                        hàng</a>
-                    <button class="btn btn-danger btn-lg btnDeleteCart">
-                        <i class="fas fa-long-arrow-alt-right"></i>&nbsp;Xóa giỏ hàng
-                    </button>
-
-                </div>
+                   
+                
             </div>
-            <div class="col-12 col-md-4">
-                <div class="cart_totals ">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th class="product-name" colspan="2" style="border-width:3px;">Cart Totals</th>
-                        </tr>
-                        </thead>
-                    </table>
-                    <h2 class="d-none">Cộng giỏ hàng</h2>
-                    <table class="table">
-                        <tbody id="cal-total-sum">
-                            <tr class="cart-psubtotal">
-                                <th>Tạm tính</th>
-                                <td data-title="Tạm tính" id="tam-tinh">
-                                    <span id="temp-sum-total"></span>
-                                </td>
-                            </tr>
-                            <tr class="order-total">
-                                <th>Tổng</th>
-                                <td data-title="Tổng" id="tong-tien">
-                                    <span id="sum-total"></span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="pay-page">
-                        <button class="btn btn-danger btn-lg" id="btnThanhtoan">Tiến hành thanh toán</button>
+            <div class="col-12 col-md-3">
+                <!-- Load info don hang vua mua -->
+                <div class="checkout-order">
+                    <div class="checkout-sidebar">
+                        <div id="order_review" class="order-success">
+                        
+                            <div class="customer-information">
+                                <h3 class="cd-title">Thông tin khách hàng</h3>
+                                <div class="customer-field">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Họ Tên</label>
+                                                <span id="name"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Email</label>
+                                                <span id="email"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Địa chỉ</label>
+                                                <span id="diachi"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="filed-item">
+                                                <label>Số điện thoại </label>
+                                                <span id="sodienthoai"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              Giỏ hàng đang trống, mời bạn mua hàng !
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-            </div>
-          </div>
+    <!-- Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+            Thanh toán đơn hàng 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Đóng</button>
+        </div>
+      </div>
     </div>
-    
+  </div>
+
+
 </section>
 
     </main>
@@ -432,34 +441,7 @@
 </div>
 
 
-    <!-- ============= Import Custom Plugin Body ============= -->
-    <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="../connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=1239278239786334&autoLogAppEvents=1" nonce="mTaePOGM"></script>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml            : true,
-                version          : 'v8.0'
-            });
-        };
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = '../connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
-    <!-- Your Chat Plugin code -->
-    <div class="fb-customerchat"
-         attribution=setup_tool
-         page_id="2114139642210452"
-         logged_in_greeting="Hi! How can we help you?"
-         logged_out_greeting="Hi! How can we help you?">
-    </div>
     </body>
 
-<!-- Mirrored from thietbidienavhh.com/gio-hang by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Dec 2020 08:05:18 GMT -->
+
 </html>
